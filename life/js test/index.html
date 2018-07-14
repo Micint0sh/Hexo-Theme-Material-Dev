@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Michael&#39;s Blog</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href= "/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href= "/css/github-markdown.css" type="text/css" rel="stylesheet"/>
+  <link href= "/css/github.css" type="text/css" rel="stylesheet"/>
+  <link href= "/css/custom.css" type="text/css" rel="stylesheet"/>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+</head>
+
+  <body>
+    <div>
+        <div class="hide-on-large-only navBlock grey darken-3 valign-wrapper">
+    <a href="#" data-target="slide-out" class="sidenav-trigger waves-effect waves-light white-text">
+        <i class="material-icons" style="font-size: 40px;margin-top:13px;margin-left:10px;float:left">menu</i>
+        <p style="float:left;font-size:24px;margin-top:16px;margin-left:10px">Michael's Blog</p>
+    </a>
+</div>
+
+<ul id="slide-out" class="sidenav sidenav-fixed grey darken-3">
+    <li id="personalInfoContainer">
+        <div class="user-view">
+            <div class="background grey darken-3">
+            </div>
+            <a href="#user"><img class="circle" src="/images/Yuuko.png"></a>
+            <a href="#name"><span class="white-text name">Michael</span></a>
+            <p class="white-text">CS student at CUHK.<p>
+            <a href="#email"><span class="white-text email">micintosh1998@gmail.com</span></a>
+        </div>
+        
+        <a class="waves-effect waves-light white-text" href="/tech"><i class="material-icons white-text">school</i>Academia</a>
+        
+        <a class="waves-effect waves-light white-text" href="/life"><i class="material-icons white-text">today</i>Life</a>
+        
+        <a class="waves-effect waves-light white-text" href="/stories"><i class="material-icons white-text">bookmark_border</i>Stories</a>
+        
+    </li>
+    
+        <div class="container" id="divider"><div class="divider"></div></div>
+        <div id="postIndicator"><div>
+        <li id="tocContainer">
+                <!-- Table of Contents -->
+                <div id="toc" class="toc-article white-text">
+                    <a href="#" class = "waves-effect waves-light hoverable" style="width:100%;" id="backToMenu">
+                        <strong class="toc-title valign-wrapper white-text"><i class="material-icons white-text" style="font-size: 1.5rem;margin-right:1.5rem;">menu</i>Table of contents</strong>
+                    <a>
+                    <div class="grey-text lighten-2">
+                        
+                    </div>
+                </div>
+        </li>
+    
+    <!-- <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a> -->
+</ul>
+
+        <main class="main">
+          <div class="container" id="postContent">
+    <h1>Markdown Testing</h1>
+    <div class="divider"></div>
+    <div class="markdown-body">
+        <p>This is a test file for markdown rendering.</p>
+<a id="more"></a> 
+<pre><code class="javascript">var express = require(&quot;express&quot;);
+var passport = require(&#39;passport&#39;);
+var app = express();
+var cors = require(&#39;cors&#39;)
+var interceptor = require(&#39;./Router/Interceptor&#39;);
+var bodyParser = require(&#39;body-parser&#39;);
+var cookieParser = require(&#39;cookie-parser&#39;);
+var validator = require(&#39;express-validator&#39;);
+var identity = require(&#39;./AccountSystem/entity/identity&#39;);
+var session = require(&quot;express-session&quot;);
+var cors = require(&#39;cors&#39;);
+// app.all(&#39;/*&#39;, function(req, res, next) {
+//   res.header(&quot;Access-Control-Allow-Origin&quot;, &quot;*&quot;);
+//   res.header(&quot;Access-Control-Allow-Headers&quot;, &quot;X-Requested-With&quot;);
+//   next();
+// });
+
+app.use(cors({credentials: true, origin: true}));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+
+app.use(session({
+    //Example
+    key: &#39;session_cookie_name&#39;,
+    secret: &#39;secret&#39;,
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(validator());
+
+passport.serializeUser(function (user, done) {
+    done(null, user.id);
+});
+
+passport.deserializeUser(function (id, done) {
+    identity.getUserFromId(id, function (err, user) {
+        done(err, user);
+    });
+});
+
+var options = {
+    redirect: false
+}
+
+app.use(&quot;/&quot;, interceptor);
+app.use(&quot;/api&quot;,require(&quot;./Router/api&quot;));
+app.use(&quot;/&quot;,express.static(&quot;client&quot;,options));
+app.use(&quot;/upload/pictures&quot;,express.static(&quot;upload/pictures&quot;,options));
+
+app.get(&quot;/login&quot;, function(req, res){
+    res.write(
+        &#39;&lt;html&gt; &lt;form action=&quot;/api/account/login&quot; method = &quot;post&quot;&gt;\n&#39; +
+        &#39;  &lt;div class=&quot;container&quot;&gt;\n&#39; +
+        &#39;  &lt;/div&gt;\n&#39; +
+        &#39;\n&#39; +
+        &#39;  &lt;div class=&quot;container&quot;&gt;\n&#39; +
+        &#39;    &lt;label for=&quot;userid&quot;&gt;&lt;b&gt;User Id&lt;/b&gt;&lt;/label&gt;\n&#39; +
+        &#39;    &lt;input type=&quot;text&quot; placeholder=&quot;Enter username&quot; name=&quot;userID&quot; required&gt;\n&#39; +
+        &#39;\n&#39; +
+        &#39;    &lt;label for=&quot;password&quot;&gt;&lt;b&gt;Password&lt;/b&gt;&lt;/label&gt;\n&#39; +
+        &#39;    &lt;input type=&quot;password&quot; placeholder=&quot;Enter Password&quot; name=&quot;password&quot; required&gt;\n&#39; +
+        &#39;\n&#39; +
+        &#39;    &lt;button type=&quot;submit&quot;&gt;Login&lt;/button&gt;\n&#39; +
+        &#39;    &lt;label&gt;\n&#39; +
+        &#39;      &lt;input type=&quot;checkbox&quot; checked=&quot;checked&quot; name=&quot;remember&quot;&gt; Remember me\n&#39; +
+        &#39;    &lt;/label&gt;\n&#39; +
+        &#39;  &lt;/div&gt;\n&#39; +
+        &#39;\n&#39; +
+        &#39;  &lt;div class=&quot;container&quot; style=&quot;background-color:#f1f1f1&quot;&gt;\n&#39; +
+        &#39;    &lt;button type=&quot;button&quot; class=&quot;cancelbtn&quot;&gt;Cancel&lt;/button&gt;\n&#39; +
+        &#39;    &lt;span class=&quot;psw&quot;&gt;Forgot &lt;a href=&quot;#&quot;&gt;password?&lt;/a&gt;&lt;/span&gt;\n&#39; +
+        &#39;  &lt;/div&gt;\n&#39; +
+        &#39;&lt;/form&gt; &#39; +
+        &#39;&lt;/html&gt;&#39;);
+    res.end();
+});
+
+app.get(&quot;/logout&quot;, function(req, res){
+    res.write(
+        &#39;&lt;html&gt; &lt;form action=&quot;/api/account/logout&quot; method = &quot;post&quot;&gt;\n&#39; +
+        &#39;  &lt;div class=&quot;container&quot;&gt;\n&#39; +
+        &#39;  &lt;/div&gt;\n&#39; +
+        &#39;\n&#39; +
+        &#39;  &lt;div class=&quot;container&quot;&gt;\n&#39; +
+        &#39;    &lt;label for=&quot;userid&quot;&gt;&lt;b&gt;User Id&lt;/b&gt;&lt;/label&gt;\n&#39; +
+        &#39;\n&#39; +
+        &#39;    &lt;button type=&quot;submit&quot;&gt;Log out&lt;/button&gt;\n&#39; +
+        &#39;    &lt;label&gt;\n&#39; +
+        &#39;    &lt;label&gt;\n&#39; +
+        &#39;      &lt;input type=&quot;checkbox&quot; checked=&quot;checked&quot; name=&quot;remember&quot;&gt; Remember me\n&#39; +
+        &#39;    &lt;/label&gt;\n&#39; +
+        &#39;  &lt;/div&gt;\n&#39; +
+        &#39;\n&#39; +
+        &#39;  &lt;div class=&quot;container&quot; style=&quot;background-color:#f1f1f1&quot;&gt;\n&#39; +
+        &#39;    &lt;button type=&quot;button&quot; class=&quot;cancelbtn&quot;&gt;Cancel&lt;/button&gt;\n&#39; +
+        &#39;    &lt;span class=&quot;psw&quot;&gt;Forgot &lt;a href=&quot;#&quot;&gt;password?&lt;/a&gt;&lt;/span&gt;\n&#39; +
+        &#39;  &lt;/div&gt;\n&#39; +
+        &#39;&lt;/form&gt; &#39; +
+        &#39;&lt;br&gt;&#39;+
+        &#39;&lt;form action = &quot;/api/team/teamOP/createTeam&quot; method = &quot;post&quot;&gt; &#39;+
+        &#39;&lt;input type=&quot;input&quot; name=&quot;introduction&quot;&gt;introduction&lt;/input&gt;&lt;br&gt;&#39;+
+        &#39;&lt;input type=&quot;input&quot; name=&quot;teamTitle&quot;&gt;title&lt;/input&gt;&#39;+
+        &#39;&lt;input type=&quot;input&quot; name=&quot;maxMember&quot;&gt;max&lt;/input&gt;&#39;+
+        &#39;&lt;input type=&quot;input&quot; name=&quot;category&quot;&gt;cate&lt;/input&gt;&#39;+
+        &#39;&lt;input type=&quot;input&quot; name=&quot;status&quot;&gt;status&lt;/input&gt;&#39;+
+        &#39;&lt;input type=&quot;input&quot; name=&quot;reminder&quot;&gt;remind&lt;/input&gt;&#39;+
+        &#39;&lt;button type=&quot;submit&quot;&gt;Post&lt;/button&gt;\n&#39; +
+        &quot;&lt;/form&gt;&quot;+
+        &#39;&lt;/html&gt;&#39;);
+    res.end();
+});
+
+app.get(&quot;/register&quot;, function(req,res) {
+    res.write(&#39;&lt;html&gt; &lt;form action=&quot;/api/account/register&quot; method = &quot;post&quot; style=&quot;border:1px solid #ccc&quot;&gt;\n&#39; +
+        &#39;  &lt;div class=&quot;container&quot;&gt;\n&#39; +
+        &#39;    &lt;h1&gt;Sign Up&lt;/h1&gt;\n&#39; +
+        &#39;    &lt;p&gt;Please fill in this form to create an account.&lt;/p&gt;\n&#39; +
+        &#39;    &lt;hr&gt;\n&#39; +
+        &#39;\n&#39; +
+        &#39;    &lt;label for=&quot;username&quot;&gt;&lt;b&gt;Username&lt;/b&gt;&lt;/label&gt;\n&#39; +
+        &#39;    &lt;input type=&quot;text&quot; placeholder=&quot;Enter username&quot; name=&quot;userID&quot; required&gt;\n&#39; +
+        &#39;\n&#39; +
+        &#39;    &lt;label for=&quot;email&quot;&gt;&lt;b&gt;Email&lt;/b&gt;&lt;/label&gt;\n&#39; +
+        &#39;    &lt;input type=&quot;text&quot; placeholder=&quot;Enter Email&quot; name=&quot;email&quot; required&gt;\n&#39; +
+        &#39;\n&#39; +
+        &#39;    &lt;label for=&quot;psw&quot;&gt;&lt;b&gt;Password&lt;/b&gt;&lt;/label&gt;\n&#39; +
+        &#39;    &lt;input type=&quot;password&quot; placeholder=&quot;Enter Password&quot; name=&quot;password&quot; required&gt;\n&#39; +
+        &#39;\n&#39; +
+        &#39;    &lt;label for=&quot;psw-repeat&quot;&gt;&lt;b&gt;Repeat Password&lt;/b&gt;&lt;/label&gt;\n&#39; +
+        &#39;    &lt;input type=&quot;password&quot; placeholder=&quot;Repeat Password&quot; name=&quot;checkPassword&quot; required&gt;\n&#39; +
+        &#39;\n&#39; +
+        &#39;&lt;br&gt;&#39; +
+        &#39;    &lt;label for=&quot;phone&quot;&gt;&lt;b&gt;Phone Number&lt;/b&gt;&lt;/label&gt;\n&#39; +
+        &#39;    &lt;input type=&quot;text&quot; placeholder=&quot;Enter phone number&quot; name=&quot;phone&quot; required&gt;\n&#39; +
+        &#39;    &lt;label for=&quot;Institution&quot;&gt;&lt;b&gt;Institution&lt;/b&gt;&lt;/label&gt;\n&#39; +
+        &#39;    &lt;input type=&quot;text&quot; placeholder=&quot;Enter institution&quot; name=&quot;institution&quot; required&gt;\n&#39;+
+        &#39;    &lt;label for=&quot;major&quot;&gt;&lt;b&gt;Major&lt;/b&gt;&lt;/label&gt;\n&#39; +
+        &#39;    &lt;input type=&quot;text&quot; placeholder=&quot;Enter major&quot; name=&quot;major&quot; required&gt;\n&#39;+
+        &#39;    &lt;label for=&quot;nickname&quot;&gt;&lt;b&gt;Nickname&lt;/b&gt;&lt;/label&gt;\n&#39; +
+        &#39;    &lt;input type=&quot;text&quot; placeholder=&quot;Enter nickname&quot; name=&quot;nickname&quot; required&gt;\n&#39;+
+        &#39;    &lt;label&gt;\n&#39; +
+        &#39;      &lt;input type=&quot;checkbox&quot; checked=&quot;checked&quot; name=&quot;remember&quot; style=&quot;margin-bottom:15px&quot;&gt; Remember me\n&#39; +
+        &#39;    &lt;/label&gt;\n&#39; +
+        &#39;\n&#39; +
+        &#39;    &lt;p&gt;By creating an account you agree to our &lt;a href=&quot;#&quot; style=&quot;color:dodgerblue&quot;&gt;Terms &amp; Privacy&lt;/a&gt;.&lt;/p&gt;\n&#39; +
+        &#39;\n&#39; +
+        &#39;    &lt;div class=&quot;clearfix&quot;&gt;\n&#39; +
+        &#39;      &lt;button type=&quot;button&quot; class=&quot;cancelbtn&quot;&gt;Cancel&lt;/button&gt;\n&#39; +
+        &#39;      &lt;button type=&quot;submit&quot; class=&quot;signupbtn&quot;&gt;Sign Up&lt;/button&gt;\n&#39; +
+        &#39;    &lt;/div&gt;\n&#39; +
+        &#39;  &lt;/div&gt;\n&#39; +
+        &#39;&lt;/form&gt; &lt;/html&gt;&#39;);
+    res.end();
+});
+
+var server = app.listen(3001);
+var instantChat = require(&quot;./InstantMessages/SocketApp&quot;)(server);
+console.log(&quot;Server started on port 3001.&quot;);
+</code></pre>
+
+    </div>
+</div>
+
+        </main>
+    </div>
+
+    <!--Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="/js/materialize.js"></script>
+    <script type="text/javascript" src="/js/highlight.pack.js"></script>
+    <script type="text/javascript" src="/js/highlightjs-line-numbers.js"></script>
+    <script type="text/javascript" src="/js/init.js"></script>
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+  </body>
+</html>

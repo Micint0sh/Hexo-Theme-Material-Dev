@@ -1,0 +1,132 @@
+* {
+    font-family: 'Roboto', -apple-system, Helvetica, Tahoma, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei",sans-serif,"Apple Color Emoji";
+}
+
+header, main, footer {
+    padding-left: 300px;
+    margin-top: 25px;
+}
+
+@media only screen and (max-width: 992px) {
+    header, main, footer {
+        padding-left: 0;
+    }
+}
+
+.card .card-title {
+  font-size: 32px;
+  font-weight: 400;
+}
+
+blockquote {
+    border-left: 5px solid #2196f3;
+}
+
+.markdown-body {
+    box-sizing: border-box;
+    min-width: 200px;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 45px;
+}
+
+table.hljs-ln {
+    border: none;
+    margin-bottom: 0px;
+}
+
+.markdown-body .hljs-ln tr {
+    background-color: rgba(0,0,0,0);
+    border: none;
+}
+
+.markdown-body .hljs-ln td.hljs-ln-numbers  {
+    white-space: nowrap;
+    border: none;
+    border-right: 1px solid #c6cbd1;
+}
+.markdown-body .hljs-ln td.hljs-ln-code  {
+    white-space: nowrap;
+    border: none;
+}
+
+.markdown-body .hljs-ln td.hljs-ln-code div.hljs-ln-line {
+    white-space: pre;
+}
+
+ol.toc{
+  list-style-type: none;
+  margin:0px;
+  padding:0px;
+}
+
+ol li.toc-item{
+  list-style-type: none;
+  margin:0px;
+  padding:0px;
+  line-height:
+  color:inherit;
+  font-weight: normal;
+}
+
+ol.toc-child {
+    padding-left: 10px;
+    color:inherit;
+    font-weight: normal;
+}
+
+ol li.toc-item a{
+  height: auto;
+  color: inherit;
+  font-weight: normal;
+}
+
+div#toc strong {
+    padding-left: 32px;
+}
+
+a.toc-link.active{
+    border-width: 0;
+    border-left: 5px;
+    border-style: solid;
+    border-color: #2196f3;
+    color: white;
+    font-weight: bold;
+    background-color: #313131;
+}
+
+.hidden {
+    display: none;
+}
+
+nav .brand-logo img {
+    height: 48px;
+    margin-top: 8px;
+    margin-left: 16px;
+}
+
+@-moz-keyframes rotate/*--for firefox--*/{
+
+    from{
+        -moz-transform:rotate(0deg);
+    }
+    to{
+        -moz-transform:rotate(180deg);
+    }
+
+}
+
+@-webkit-keyframes rotate/*--for webkit--*/{
+
+    from{
+        -webkit-transform:rotate(0deg);
+    }
+    to{
+        -webkit-transform:rotate(180deg);
+    }
+}
+
+.navBlock {
+    height: 64px;
+    display: block;
+}

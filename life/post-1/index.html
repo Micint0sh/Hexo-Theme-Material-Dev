@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Michael&#39;s Blog</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href= "/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href= "/css/github-markdown.css" type="text/css" rel="stylesheet"/>
+  <link href= "/css/github.css" type="text/css" rel="stylesheet"/>
+  <link href= "/css/custom.css" type="text/css" rel="stylesheet"/>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+</head>
+
+  <body>
+    <div>
+        <div class="hide-on-large-only navBlock grey darken-3 valign-wrapper">
+    <a href="#" data-target="slide-out" class="sidenav-trigger waves-effect waves-light white-text">
+        <i class="material-icons" style="font-size: 40px;margin-top:13px;margin-left:10px;float:left">menu</i>
+        <p style="float:left;font-size:24px;margin-top:16px;margin-left:10px">Michael's Blog</p>
+    </a>
+</div>
+
+<ul id="slide-out" class="sidenav sidenav-fixed grey darken-3">
+    <li id="personalInfoContainer">
+        <div class="user-view">
+            <div class="background grey darken-3">
+            </div>
+            <a href="#user"><img class="circle" src="/images/Yuuko.png"></a>
+            <a href="#name"><span class="white-text name">Michael</span></a>
+            <p class="white-text">CS student at CUHK.<p>
+            <a href="#email"><span class="white-text email">micintosh1998@gmail.com</span></a>
+        </div>
+        
+        <a class="waves-effect waves-light white-text" href="/tech"><i class="material-icons white-text">school</i>Academia</a>
+        
+        <a class="waves-effect waves-light white-text" href="/life"><i class="material-icons white-text">today</i>Life</a>
+        
+        <a class="waves-effect waves-light white-text" href="/stories"><i class="material-icons white-text">bookmark_border</i>Stories</a>
+        
+    </li>
+    
+        <div class="container" id="divider"><div class="divider"></div></div>
+        <div id="postIndicator"><div>
+        <li id="tocContainer">
+                <!-- Table of Contents -->
+                <div id="toc" class="toc-article white-text">
+                    <a href="#" class = "waves-effect waves-light hoverable" style="width:100%;" id="backToMenu">
+                        <strong class="toc-title valign-wrapper white-text"><i class="material-icons white-text" style="font-size: 1.5rem;margin-right:1.5rem;">menu</i>Table of contents</strong>
+                    <a>
+                    <div class="grey-text lighten-2">
+                        
+                    </div>
+                </div>
+        </li>
+    
+    <!-- <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a> -->
+</ul>
+
+        <main class="main">
+          <div class="container" id="postContent">
+    <h1>post-test</h1>
+    <div class="divider"></div>
+    <div class="markdown-body">
+        <pre><code>for (int i=0;i&lt;100;i++) {
+    printf(&quot;Hello, world!&quot;);
+}
+</code></pre>
+<p><em>marked</em></p>
+<p><em>marked</em></p>
+<p>$a^2+2a+\sum_a^b2cd$</p>
+
+    </div>
+</div>
+
+        </main>
+    </div>
+
+    <!--Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="/js/materialize.js"></script>
+    <script type="text/javascript" src="/js/highlight.pack.js"></script>
+    <script type="text/javascript" src="/js/highlightjs-line-numbers.js"></script>
+    <script type="text/javascript" src="/js/init.js"></script>
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+  </body>
+</html>
