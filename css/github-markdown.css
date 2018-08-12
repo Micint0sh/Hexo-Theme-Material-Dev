@@ -585,6 +585,10 @@
   background-color: #f6f8fa;
 }
 
+.markdown-body .hljs table tr:nth-child(2n) {
+  background-color: rgba(0,0,0,0);
+}
+
 .markdown-body img {
   max-width: 100%;
   box-sizing: content-box;
@@ -636,7 +640,7 @@
   overflow: auto;
   font-size: 85%;
   line-height: 1.45;
-  background-color: #f6f8fa;
+  background-color: #282c34;
   border-radius: 3px;
 }
 

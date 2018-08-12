@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Michael&#39;s Blog</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href= "/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href= "/css/github-markdown.css" type="text/css" rel="stylesheet"/>
+  <link href= "/css/custom.css" type="text/css" rel="stylesheet"/>
+  <link href= "/css/atom-one-dark.css" type="text/css" rel="stylesheet"/>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+</head>
+
+  <body>
+    <div>
+        <div class="hide-on-large-only navBlock grey darken-3 valign-wrapper">
+    <a href="#" data-target="slide-out" class="sidenav-trigger waves-effect waves-light white-text">
+        <i class="material-icons" style="font-size: 40px;margin-top:13px;margin-left:10px;float:left">menu</i>
+        <p style="float:left;font-size:24px;margin-top:16px;margin-left:10px">Michael's Blog</p>
+    </a>
+</div>
+
+<ul id="slide-out" class="sidenav sidenav-fixed grey darken-3">
+    <li id="personalInfoContainer">
+        <div class="user-view">
+            <div class="background grey darken-3">
+            </div>
+            <a href="#user"><img class="circle" src="/images/Yuuko.png"></a>
+            <a href="#name"><span class="white-text name">Michael</span></a>
+            <p class="white-text">CS student at CUHK.<p>
+            <a href="#email"><span class="white-text email">micintosh1998@gmail.com</span></a>
+        </div>
+        
+        <a class="waves-effect waves-light white-text" href="/tech"><i class="material-icons white-text">school</i>Academia</a>
+        
+        <a class="waves-effect waves-light white-text" href="/life"><i class="material-icons white-text">today</i>Life</a>
+        
+        <a class="waves-effect waves-light white-text" href="/stories"><i class="material-icons white-text">bookmark_border</i>Stories</a>
+        
+    </li>
+    
+        <div class="container" id="divider"><div class="divider"></div></div>
+        <div id="postIndicator"><div>
+        <li id="tocContainer">
+                <!-- Table of Contents -->
+                <div id="toc" class="toc-article white-text">
+                    <a href="#" class = "waves-effect waves-light hoverable" style="width:100%;" id="backToMenu">
+                        <strong class="toc-title valign-wrapper white-text"><i class="material-icons white-text" style="font-size: 1.5rem;margin-right:1.5rem;">menu</i>Table of contents</strong>
+                    <a>
+                    <div class="grey-text lighten-2">
+                        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#整数题"><span class="toc-number">2.</span> <span class="toc-text">整数题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#bitAnd"><span class="toc-number">2.1.</span> <span class="toc-text">bitAnd</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#getByte"><span class="toc-number">2.2.</span> <span class="toc-text">getByte</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#logicalShift"><span class="toc-number">2.3.</span> <span class="toc-text">logicalShift</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bitCount"><span class="toc-number">2.4.</span> <span class="toc-text">bitCount</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bang"><span class="toc-number">2.5.</span> <span class="toc-text">bang</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tmin"><span class="toc-number">2.6.</span> <span class="toc-text">tmin</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fitsBits"><span class="toc-number">2.7.</span> <span class="toc-text">fitsBits</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#divpwr2"><span class="toc-number">2.8.</span> <span class="toc-text">divpwr2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#negate"><span class="toc-number">2.9.</span> <span class="toc-text">negate</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#isPositive"><span class="toc-number">2.10.</span> <span class="toc-text">isPositive</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#isLessOrEqual"><span class="toc-number">2.11.</span> <span class="toc-text">isLessOrEqual</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ilog2"><span class="toc-number">2.12.</span> <span class="toc-text">ilog2</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#浮点数题"><span class="toc-number">3.</span> <span class="toc-text">浮点数题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#float-neg"><span class="toc-number">3.1.</span> <span class="toc-text">float_neg</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#float-i2f"><span class="toc-number">3.2.</span> <span class="toc-text">float_i2f</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#float-twice"><span class="toc-number">3.3.</span> <span class="toc-text">float_twice</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol>
+                    </div>
+                </div>
+        </li>
+    
+    <!-- <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a> -->
+</ul>
+
+        <main class="main">
+          <div class="container" id="postContent">
+    <h1>CSAPP Labs-Data Lab</h1>
+    <div class="divider"></div>
+    <div class="markdown-body">
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>很早以前就想读《深入理解计算机系统》这本书，但一直都没能静下心来。趁着这个暑假还没结束，写一写其中附带的实验练习，也算是为下学期操作系统这门课做准备了吧。这里会记录和解释自己和网络上的一些解法，说不定可以对之后的自己或者看到这篇文章的其他人（真的有么）起到一点点参考价值。</p>
+<p>实验的题目可以从<a href="http://csapp.cs.cmu.edu/3e/labs.html" target="_blank" rel="noopener">CMU的网站</a>上下载到。其中的Writeup文件里有详细的规则介绍，这里就不赘述了。值得一提的是其所用的dlc编译器对于代码的格式有较严格的要求（见<em>Writeup 7.Advice</em>部分），不注意的话可能会导致报错（ parse error ）。改动bits.c文件之后重新测试，需要重新<em>make</em>一遍。个人感觉题目还是有相当的难度的…（深深感觉到自己的弱…再不加油就要完蛋啦）</p>
+<p>那么，现在打开<em>bits.c</em>!</p>
+<h1 id="整数题"><a href="#整数题" class="headerlink" title="整数题"></a>整数题</h1><h2 id="bitAnd"><a href="#bitAnd" class="headerlink" title="bitAnd"></a>bitAnd</h2><pre><code class="C">/*
+ * bitAnd - x&amp;y using only ~ and |
+ *   Example: bitAnd(6, 5) = 4
+ *   Legal ops: ~ |
+ *   Max ops: 8
+ *   Rating: 1
+ */
+</code></pre>
+<p>第一题是按位进行与运算。看到合法操作(Legal ops)为按位取反(~)和按位或(|)，马上就知道用德摩根定律(De Morgan’s Law)：</p>
+<pre><code class="c++">int bitAnd(int x, int y) {
+    //A&amp;B = ~(~A|~B)
+    return ~(~x|~y);
+}
+</code></pre>
+<p>第一题就解决了！不愧是Rating: 1… 那么，下一题！</p>
+<h2 id="getByte"><a href="#getByte" class="headerlink" title="getByte"></a>getByte</h2><pre><code class="c++">/*
+ * getByte - Extract byte n from word x
+ *   Bytes numbered from 0 (LSB) to 3 (MSB)
+ *   Examples: getByte(0x12345678,1) = 0x56
+ *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;
+ *   Max ops: 6
+ *   Rating: 2
+ */
+</code></pre>
+<p>第二题要求从字中提取对应的byte。可以直接将0xFF移位到对应的位置，与x进行&amp;运算。</p>
+<pre><code class="C">int getByte(int x, int n) {
+    int octn = n &lt;&lt; 3; //number of bits to shift
+    return ((x &amp; (0xff &lt;&lt; octn)) &gt;&gt; octn) &amp; 0xff;
+}
+</code></pre>
+<h2 id="logicalShift"><a href="#logicalShift" class="headerlink" title="logicalShift"></a>logicalShift</h2><pre><code class="C">/*
+ * logicalShift - shift x to the right by n, using a logical shift
+ *   Can assume that 0 &lt;= n &lt;= 31
+ *   Examples: logicalShift(0x87654321,4) = 0x08765432
+ *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;
+ *   Max ops: 20
+ *   Rating: 3
+ */
+</code></pre>
+<p>第三题要求实现Logical Shift，注意到C语言&gt;&gt;操作实现的是Arithmetical Shift。二者的区别如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Original (8-bits signed int)</th>
+<th style="text-align:center">Logical Shift (&gt;&gt;2)</th>
+<th style="text-align:center">Arithmetical Shift (&gt;&gt;2)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0b10110010</td>
+<td style="text-align:center">0b00101100</td>
+<td style="text-align:center">0b11101100</td>
+</tr>
+<tr>
+<td style="text-align:center">0b00110010</td>
+<td style="text-align:center">0b00001100</td>
+<td style="text-align:center">0b00001100</td>
+</tr>
+</tbody>
+</table>
+<p>Arithmetic Shift会保留数字的符号，如果是负数会在开头补1，整数则补0。Logical Shift则是直接移位，无论正负都直接补0。我们可以构造一个mask人为将开头的1清零：</p>
+<pre><code class="c">int logicalShift(int x, int n) {
+  int shiftLeft = 32 + (~n);     //calculate 32 - n - 1
+  int oxffffffff = ~0;            
+  int mask =  ~(oxffffffff &lt;&lt; shiftLeft &lt;&lt; 1); //shift twice to avoid undefined behavior
+  return (x &gt;&gt; n) &amp; mask;
+}
+</code></pre>
+<h2 id="bitCount"><a href="#bitCount" class="headerlink" title="bitCount"></a>bitCount</h2><pre><code>/*
+ * bitCount - returns count of number of 1&#39;s in word
+ *   Examples: bitCount(5) = 2, bitCount(7) = 3
+ *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;
+ *   Max ops: 40
+ *   Rating: 4
+ */
+</code></pre><p>要求返回整数中1的个数。因为有操作数量的限制，这一题有一点难。我参考了<a href="https://stackoverflow.com/a/15979139" target="_blank" rel="noopener">Stack Overflow</a>上的解法。因为一个n位二进制数中1的个数一定能用n位二进制数表示，我们可以用这些位直接存放个数。现在我们举例说明：计算0b10110010中1的个数。首先，我们计算每2位中1的个数，并把它存到这2位中。我们将2位中的第一位和第二位分开：</p>
+<p>0b10110010 $\rightarrow$ 0b<strong>1</strong>0<strong>1</strong>0<strong>0</strong>0<strong>1</strong>0 + 0b0<strong>0</strong>0<strong>1</strong>0<strong>0</strong>0<strong>0</strong></p>
+<p>这样，将第一个数右移1位，再与第二个数相加，我们就得到了想要的结果：0b<strong>01</strong>10<strong>00</strong>01。每两位都存放着这两位中1的个数。同理，我们计算每4位：</p>
+<p>0b01100001 $\rightarrow$ 0b<strong>01</strong>00<strong>00</strong>00 + 0b00<strong>10</strong>00<strong>01</strong></p>
+<p>将第一个数右移2位，与第二个数相加，得到0b<strong>0011</strong>0001。每四位都存放着这四位中1的个数。以此类推，我们就可以得到最后的结果了。在实现的时候，注意到一旦我们获得了每八位的结果，我们可以直接用0xFF作为mask直接计算最后结果（因为题目限制可以使用的最大常数为0xFF）。</p>
+<pre><code class="c">int bitCount(int x) {
+  //constructing mask constants
+  int oxaaaa = (0xaa &lt;&lt; 8) + 0xaa;
+  int oxaaaaaaaa = (oxaaaa &lt;&lt; 16) + oxaaaa;
+  int ox55555555 = ~oxaaaaaaaa;
+  int oxcccc = (0xcc &lt;&lt; 8) + 0xcc;
+  int oxcccccccc = (oxcccc &lt;&lt; 16) + oxcccc;
+  int ox33333333 = ~oxcccccccc;
+  int oxf0f0 = (0xf0 &lt;&lt; 8) + 0xf0;
+  int oxf0f0f0f0 = (oxf0f0 &lt;&lt; 16) + oxf0f0;
+  int ox0f0f0f0f = ~oxf0f0f0f0;
+  int result = (((x &amp; oxaaaaaaaa) &gt;&gt; 1) &amp; ox55555555) + (x &amp; ox55555555); // 2 bits
+  result = (((result &amp; oxcccccccc) &gt;&gt; 2) &amp; ox33333333) + (result &amp; ox33333333); // 4 bits
+  result = (((result &amp; oxf0f0f0f0) &gt;&gt; 4) &amp; ox0f0f0f0f) + (result &amp; ox0f0f0f0f); // 8 bits
+  return (result &amp; 0xff) + ((result &gt;&gt; 8) &amp; 0xff) + ((result &gt;&gt; 16) &amp; 0xff) + ((result &gt;&gt; 24) &amp; 0xff);
+}
+</code></pre>
+<h2 id="bang"><a href="#bang" class="headerlink" title="bang"></a>bang</h2><pre><code class="C">/*
+ * bang - Compute !x without using !
+ *   Examples: bang(3) = 0, bang(0) = 1
+ *   Legal ops: ~ &amp; ^ | + &lt;&lt; &gt;&gt;
+ *   Max ops: 12
+ *   Rating: 4
+ */
+</code></pre>
+<p>要求计算逻辑取反（！）。这一题我也一下子没有想出来… 复制<a href="https://stackoverflow.com/a/4973196" target="_blank" rel="noopener">Stack Overflow</a>中的解法：如果任意一位上有1，就把最低位设为1。利用Divide and Conquer的思路:</p>
+<pre><code class="c">int bang(int x) {
+  // Author: Dipstick @ stackoverflow
+  // Set the bottom bit if any bit set.
+  x = x | x &gt;&gt; 1;
+  x = x | x &gt;&gt; 2;
+  x = x | x &gt;&gt; 4;
+  x = x | x &gt;&gt; 8;
+  x = x | x &gt;&gt; 16;
+  return (x &amp; 1)^1;
+}
+</code></pre>
+<h2 id="tmin"><a href="#tmin" class="headerlink" title="tmin"></a>tmin</h2><pre><code class="c">/*
+ * tmin - return minimum two&#39;s complement integer
+ *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;
+ *   Max ops: 4
+ *   Rating: 1
+ */
+</code></pre>
+<p>非常直接的一题，要求返回最小的二补数。直接返回0xFFFFFFFF:</p>
+<pre><code class="C">int tmin(void) {
+  return 1 &lt;&lt; 31;
+}
+</code></pre>
+<h2 id="fitsBits"><a href="#fitsBits" class="headerlink" title="fitsBits"></a>fitsBits</h2><pre><code class="c">/*
+ * fitsBits - return 1 if x can be represented as an
+ *  n-bit, two&#39;s complement integer.
+ *   1 &lt;= n &lt;= 32
+ *   Examples: fitsBits(5,3) = 0, fitsBits(-4,3) = 1
+ *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;
+ *   Max ops: 15
+ *   Rating: 2
+ */
+</code></pre>
+<p>要求判断x是否能用n位表示。这一题我的思路是将x转换为非负数，再看这个非负数能否用n-1位表示。为了防止溢出，如果x为负，我们将其变为-x-1。之后用一个n-1位的mask来截取相应位数，与转化后的x做异或运算即可。</p>
+<pre><code class="c">int fitsBits(int x, int n) {
+    int oxffffffff = ~0;
+    int ifpos = x &gt;&gt; 31;         //0x00000000-&gt;pos 0x11111111-&gt;neg
+    int posx = ifpos ^ x;         //-x-1 if neg, x if pos
+    int nm1 = n + oxffffffff;     //n-1
+    int mask = ~(oxffffffff &gt;&gt; nm1 &lt;&lt; nm1);
+    int cut = mask &amp; posx;
+    //if cut == posx -&gt; yes else no
+    //edge case: x = 0
+    return !(cut^posx) | !x;
+}
+</code></pre>
+<h2 id="divpwr2"><a href="#divpwr2" class="headerlink" title="divpwr2"></a>divpwr2</h2><pre><code class="C">/*
+ * divpwr2 - Compute x/(2^n), for 0 &lt;= n &lt;= 30
+ *  Round toward zero
+ *   Examples: divpwr2(15,1) = 7, divpwr2(-33,4) = -2
+ *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;
+ *   Max ops: 15
+ *   Rating: 2
+ */
+</code></pre>
+<p>这一题需要注意取整的方向。我们可以分正负数考虑。如果x是正数，直接右移n位。如果x是负数，则需要判断是否需要向上取整。我们可以用一个mask来判断x的末n位是否为0，若不是则需要加一。</p>
+<pre><code class="C">int divpwr2(int x, int n) {
+    int ifpos = x &gt;&gt; 31; //0x00000000-&gt;pos 0x11111111-&gt;neg
+    int res = (x &gt;&gt; n) + (ifpos &amp; !(!(~(~0&lt;&lt;n) &amp; x)));    //~(~0&lt;&lt;n) -&gt; n bits mask
+    return res;
+}
+</code></pre>
+<h2 id="negate"><a href="#negate" class="headerlink" title="negate"></a>negate</h2><pre><code class="c">/*
+ * negate - return -x
+ *   Example: negate(1) = -1.
+ *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;
+ *   Max ops: 5
+ *   Rating: 2
+ */
+</code></pre>
+<p>基础题。利用二补数的性质，直接返回~x+1。</p>
+<pre><code class="c">int negate(int x) {
+  return ~x+1;
+}
+</code></pre>
+<h2 id="isPositive"><a href="#isPositive" class="headerlink" title="isPositive"></a>isPositive</h2><pre><code class="c">/*
+ * isPositive - return 1 if x &gt; 0, return 0 otherwise
+ *   Example: isPositive(-1) = 0.
+ *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;
+ *   Max ops: 8
+ *   Rating: 3
+ */
+</code></pre>
+<p>其实我们在<a href="#fitsBits">fitsBits</a>一题中已经解决了这个问题。将x右移31位，则可以得到符号位的信息。</p>
+<pre><code class="C">int isPositive(int x) {
+  int ifpos = !(x &gt;&gt; 31); //1-&gt;pos or 0, 0-&gt;neg
+  return ifpos &amp; !(!x);
+}
+</code></pre>
+<h2 id="isLessOrEqual"><a href="#isLessOrEqual" class="headerlink" title="isLessOrEqual"></a>isLessOrEqual</h2><pre><code class="c">/*
+ * isLessOrEqual - if x &lt;= y  then return 1, else return 0
+ *   Example: isLessOrEqual(4,5) = 1.
+ *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;
+ *   Max ops: 24
+ *   Rating: 3
+ */
+</code></pre>
+<p>需要判断x是否小于等于y。直接相减再判断符号的话可能会导致溢出。我们可以先判断x和y的符号，如果符号不同的话则直接得到结果。如果符号相同再做减法。</p>
+<pre><code class="c">int isLessOrEqual(int x, int y) {
+  int xpos = !(x &gt;&gt; 31); //1-&gt;pos or 0, 0-&gt;neg
+  int ypos = !(y &gt;&gt; 31);
+  int ypxn = ypos &amp; (!xpos); //y positive, x negative
+  int ynxp = (!ypos) &amp; xpos; //y negative, x positive
+  int cmp = ~x+1+y; //y-x. if &gt;= 0, return 1, else return 0
+  int ifpos = !(cmp &gt;&gt; 31); //1-&gt;pos or 0, 0-&gt;neg
+  return (ypxn | ifpos) &amp; !ynxp;
+}
+</code></pre>
+<h2 id="ilog2"><a href="#ilog2" class="headerlink" title="ilog2"></a>ilog2</h2><pre><code class="C">/*
+ * ilog2 - return floor(log base 2 of x), where x &gt; 0
+ *   Example: ilog2(16) = 4
+ *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;
+ *   Max ops: 90
+ *   Rating: 4
+ */
+</code></pre>
+<p>要求实现log运算。一开始没有思路，后来看到网上的提示：计算log相当于找到最高位1出现的位置。这样一来就想到用二分法来查找。思路和<a href="#bang">bang</a>这题有点像，用移位(&gt;&gt;)加上或(|)运算来判断是否存在1，将范围逐渐缩小即可。</p>
+<pre><code class="c">int ilog2(int x) {
+    int count = 0;
+    int oxffffffff = ~0;
+    int oxffff = (0xff &lt;&lt; 8) + 0xff;
+    int left16 = 0, right16 = 0, left8 = 0, right8 = 0, left4 = 0,\
+    right4 = 0, left2 = 0, right2 = 0;
+    //16 bits
+    left16 = (x &amp; (oxffff &lt;&lt; 16)) &gt;&gt; 16;
+    right16 = x &amp; oxffff;
+    //half the range and accumulate
+    x = (left16 &amp; (!left16 + oxffffffff)) + (right16 &amp; (!!left16 + oxffffffff));
+    count = count + (16 &amp; (!left16 + oxffffffff));
+    //8 bits
+    left8 = (x &amp; (0xff &lt;&lt; 8)) &gt;&gt; 8;
+    right8 = x &amp; 0xff;
+    //half the range and accumulate
+    x = (left8 &amp; (!left8 + oxffffffff)) + (right8 &amp; (!!left8 + oxffffffff));
+    count = count + (8 &amp; (!left8 + oxffffffff));
+    //4 bits
+    left4 = (x &amp; (0xf &lt;&lt; 4)) &gt;&gt; 4;
+    right4 = x &amp; 0xf;
+    //half the range and accumulate
+    x = (left4 &amp; (!left4 + oxffffffff)) + (right4 &amp; (!!left4 + oxffffffff));
+    count = count + (4 &amp; (!left4 + oxffffffff));
+    //2 bits
+    left2 = (x &amp; (3 &lt;&lt; 2)) &gt;&gt; 2;
+    right2 = x &amp; 3;
+    //half the range and accumulate
+    x = (left2 &amp; (!left2 + oxffffffff)) + (right2 &amp; (!!left2 + oxffffffff));
+    count = count + (2 &amp; (!left2 + oxffffffff));
+    return count + !!(x &amp; 2);
+}
+</code></pre>
+<h1 id="浮点数题"><a href="#浮点数题" class="headerlink" title="浮点数题"></a>浮点数题</h1><h2 id="float-neg"><a href="#float-neg" class="headerlink" title="float_neg"></a>float_neg</h2><pre><code class="c">/*
+ * float_neg - Return bit-level equivalent of expression -f for
+ *   floating point argument f.
+ *   Both the argument and result are passed as unsigned int&#39;s, but
+ *   they are to be interpreted as the bit-level representations of
+ *   single-precision floating point values.
+ *   When argument is NaN, return argument.
+ *   Legal ops: Any integer/unsigned operations incl. ||, &amp;&amp;. also if, while
+ *   Max ops: 10
+ *   Rating: 2
+ */
+</code></pre>
+<p>很直接的题。我们分别获得符号位，指数位和分数位并判断是否为NaN即可。</p>
+<pre><code class="c">unsigned float_neg(unsigned uf) {
+ unsigned sign = 0x80000000 &amp; uf;
+ unsigned trun = uf - sign;
+ unsigned expo = 0x7f800000 &amp; uf;
+ unsigned frac = 0x7fffff &amp; uf;
+ if(expo == 0x7f800000 &amp;&amp; frac != 0) return uf;
+ return (!sign &lt;&lt; 31) + trun;
+}
+</code></pre>
+<h2 id="float-i2f"><a href="#float-i2f" class="headerlink" title="float_i2f"></a>float_i2f</h2><pre><code class="c">/*
+ * float_i2f - Return bit-level equivalent of expression (float) x
+ *   Result is returned as unsigned int, but
+ *   it is to be interpreted as the bit-level representation of a
+ *   single-precision floating point values.
+ *   Legal ops: Any integer/unsigned operations incl. ||, &amp;&amp;. also if, while
+ *   Max ops: 30
+ *   Rating: 4
+ */
+</code></pre>
+<p>要求实现将整数cast成浮点数。这一题需要注意四舍五入的方式，具体的细节可以参见<a href="https://www.cs.cmu.edu/~213/lectures/04-float.pdf" target="_blank" rel="noopener">CMU讲义</a>。其他部分有点繁琐，不过难度不大。</p>
+<pre><code class="c">unsigned float_i2f(int x) {
+  unsigned sign = 0;
+  unsigned frac = 0;
+  unsigned temp = 0;
+  unsigned expo = 0xffffffff;
+  unsigned nbits = 0, remain = 0, counter = 0;
+
+  //special case
+  if(!x) return 0;
+
+  sign = x &amp; 0x80000000;
+  //31 bits representation
+  frac = x;
+  if(sign) frac = -x;
+  //count exponent
+  temp = frac;
+  while(temp &gt; 0) {
+      expo ++;
+      temp = temp &gt;&gt; 1;
+  }
+  //round to 23 bits
+  nbits = expo;
+  counter = nbits - 23;
+  if (nbits &gt; 23) {
+      //needs rounding
+      unsigned halfway = 1 &lt;&lt; (counter - 1);
+      remain = ((~(0xffffffff &lt;&lt; counter))) &amp; frac;
+      nbits = 23;
+      frac = frac &gt;&gt; counter;
+      //round up
+      if(remain &gt; halfway) frac += 1;
+      else if(remain == halfway) {
+         //round to even
+         if (frac % 2) frac += 1;
+      }
+      if (frac &gt;= 0x1000000) {
+          //if carry, add exp
+          frac = frac &gt;&gt; 1;
+          expo += 1;
+      }
+  }
+  //bias
+  expo += 127;
+  expo = expo &lt;&lt; 23;
+  frac = (frac &lt;&lt; (23 - nbits)) &amp; 0x7fffff;
+  return sign + expo + frac;
+}
+</code></pre>
+<h2 id="float-twice"><a href="#float-twice" class="headerlink" title="float_twice"></a>float_twice</h2><pre><code class="c">/*
+ * float_twice - Return bit-level equivalent of expression 2*f for
+ *   floating point argument f.
+ *   Both the argument and result are passed as unsigned int&#39;s, but
+ *   they are to be interpreted as the bit-level representation of
+ *   single-precision floating point values.
+ *   When argument is NaN, return argument
+ *   Legal ops: Any integer/unsigned operations incl. ||, &amp;&amp;. also if, while
+ *   Max ops: 30
+ *   Rating: 4
+ */
+</code></pre>
+<p>这一题需要注意：当指数部分为0，分数部分用的是非规范化（denormalized）的表示方法。需要分别讨论。</p>
+<pre><code class="c">unsigned float_twice(unsigned uf) {
+    unsigned sign = 0x80000000 &amp; uf;
+    unsigned expo = 0x7f800000 &amp; uf;
+    unsigned frac = 0x7fffff &amp; uf;
+    if((expo == 0 &amp;&amp; frac == 0) || expo == 0x7f800000) return uf;
+    if(expo) {
+        //denormalized, add expo
+        expo += 0x800000;
+    }
+    else if (frac &gt; 0x400000) {
+        //denorm -&gt; norm, trunc frac &amp; add expo
+        frac = frac &lt;&lt; 1 &amp; 0x7fffff;
+        expo += 0x800000;
+    } else {
+        //normalized, shift frac
+        frac = frac &lt;&lt; 1;
+    }
+    return sign + expo + frac;
+}
+</code></pre>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>Data Lab确实让我更加深入地了解了整数和浮点数的表示细节。其中有些题目用到了Divide and Conquer的思想和二分法，具有启发性。</p>
+<p>那么，下个lab见～</p>
+
+    </div>
+</div>
+
+        </main>
+    </div>
+
+    <!--Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="/js/materialize.js"></script>
+    <script type="text/javascript" src="/js/highlight.pack.js"></script>
+    <script type="text/javascript" src="/js/highlightjs-line-numbers.js"></script>
+    <script type="text/javascript" src="/js/init.js"></script>
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+  </body>
+</html>
