@@ -635,8 +635,8 @@
   word-break: normal;
 }
 
-#gitalk-container.markdown-body #gitalk-container.highlight pre,
-#gitalk-container.markdown-body pre {
+.gt-container .markdown-body .highlight pre,
+.gt-container .markdown-body pre {
   padding: 16px;
   overflow: auto;
   font-size: 85%;

@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Michael&#39;s Blog</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href= "/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href= "/css/github-markdown.css" type="text/css" rel="stylesheet"/>
+  <link href= "/css/custom.css" type="text/css" rel="stylesheet"/>
+  <link href= "/css/atom-one-dark.css" type="text/css" rel="stylesheet"/>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+</head>
+
+  <body>
+    <div>
+        <div class="hide-on-large-only navBlock grey darken-3 valign-wrapper">
+    <a href="#" data-target="slide-out" class="sidenav-trigger waves-effect waves-light white-text">
+        <i class="material-icons" style="font-size: 40px;margin-top:13px;margin-left:10px;float:left">menu</i>
+        <p style="float:left;font-size:24px;margin-top:16px;margin-left:10px">Michael's Blog</p>
+    </a>
+</div>
+
+<ul id="slide-out" class="sidenav sidenav-fixed grey darken-3">
+    <li id="personalInfoContainer">
+        <div class="user-view">
+            <div class="background grey darken-3">
+            </div>
+            <a href="#user"><img class="circle" src="/images/Yuuko.png"></a>
+            <a href="#name"><span class="white-text name">Michael</span></a>
+            <p class="white-text">CS student at CUHK.<p>
+            <a href="#email"><span class="white-text email">micintosh1998@gmail.com</span></a>
+        </div>
+        
+        <a class="waves-effect waves-light white-text" href="/tech"><i class="material-icons white-text">school</i>Academia</a>
+        
+        <a class="waves-effect waves-light white-text" href="/life"><i class="material-icons white-text">today</i>Life</a>
+        
+        <a class="waves-effect waves-light white-text" href="/stories"><i class="material-icons white-text">bookmark_border</i>Stories</a>
+        
+    </li>
+    
+        <div class="container" id="divider"><div class="divider"></div></div>
+        <div id="postIndicator"><div>
+        <li id="tocContainer">
+                <!-- Table of Contents -->
+                <div id="toc" class="toc-article white-text">
+                    <a href="#" class = "waves-effect waves-light hoverable" style="width:100%;" id="backToMenu">
+                        <strong class="toc-title valign-wrapper white-text"><i class="material-icons white-text" style="font-size: 1.5rem;margin-right:1.5rem;">menu</i>Table of contents</strong>
+                    <a>
+                    <div class="grey-text lighten-2">
+                        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#拆除外壳"><span class="toc-number">1.</span> <span class="toc-text">拆除外壳</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第一阶段"><span class="toc-number">2.</span> <span class="toc-text">第一阶段</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第二阶段"><span class="toc-number">3.</span> <span class="toc-text">第二阶段</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第三阶段"><span class="toc-number">4.</span> <span class="toc-text">第三阶段</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第四阶段"><span class="toc-number">5.</span> <span class="toc-text">第四阶段</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第五阶段"><span class="toc-number">6.</span> <span class="toc-text">第五阶段</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第六阶段"><span class="toc-number">7.</span> <span class="toc-text">第六阶段</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#？？？"><span class="toc-number">8.</span> <span class="toc-text">？？？</span></a></li></ol>
+                    </div>
+                </div>
+        </li>
+    
+    <!-- <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a> -->
+</ul>
+
+        <main class="main">
+          <div class="container" id="postContent">
+    <h1>CSAPP-Labs-Bomb-Lab</h1>
+    <div class="divider"></div>
+    <div class="markdown-body">
+        <p>“干得漂亮，特工三号。炸弹就在实验室中央的实验台上，怎么解决它就靠你自己的本事了。祝好运。” 耳机中冰冷的声音说道。看向手里仅有的gdb牌万用表和objdump牌改锥，你叹了口气。没办法，只能硬上了。</p>
+<h1 id="拆除外壳"><a href="#拆除外壳" class="headerlink" title="拆除外壳"></a>拆除外壳</h1><p>不拆除炸弹的外壳，就没有办法看到内部的构造。你拿起objdump牌改锥准备下手。正在这时，一张小纸片吸引了你的注意：</p>
+<pre><code class="c">//Bomb.c:
+/***************************************************************************
+ * Dr. Evil&#39;s Insidious Bomb, Version 1.1
+ * Copyright 2011, Dr. Evil Incorporated. All rights reserved.
+ *
+ * ...
+</code></pre>
+<p>肯定是邪恶博士粗心大意把炸弹说明留在这里了。你迅速地阅读了说明，了解到这个炸弹一共有6个阶段。在每个阶段的开始，炸弹都会读入一个字符串，如果输入错误则会引爆。六个阶段分别包含在名为phase_1, phase_2, … , phase_6的六个函数中，输入以参数的形式传入到函数内。看到这里，你已经大致了解了炸弹的结构。经过多年训练的你熟练地</p>
+<pre><code class="shell">$ objdump -d ./bomb &gt; bomb.s
+</code></pre>
+<p>将炸弹的内容反汇编，并重定向到文件中。接下来就要一个阶段一个阶段的解除炸弹了！你充满了决心。</p>
+<h1 id="第一阶段"><a href="#第一阶段" class="headerlink" title="第一阶段"></a>第一阶段</h1><p>你很快搜索到了函数phase_1的位置。</p>
+<pre><code class="assembly">0000000000400ee0 &lt;phase_1&gt;:
+  400ee0:    48 83 ec 08              sub    $0x8,%rsp
+  400ee4:    be 00 24 40 00           mov    $0x402400,%esi    # pass 0x402400 as 2nd param
+  400ee9:    e8 4a 04 00 00           callq  401338 &lt;strings_not_equal&gt; #return value-&gt;%rax
+  400eee:    85 c0                    test   %eax,%eax
+  400ef0:    74 05                    je     400ef7 &lt;phase_1+0x17&gt; #if %eax == 0, jump
+  400ef2:    e8 43 05 00 00           callq  40143a &lt;explode_bomb&gt; # else explode
+  400ef7:    48 83 c4 08              add    $0x8,%rsp
+  400efb:    c3                       retq
+</code></pre>
+<p>从刚刚读到的说明中你了解到，输入的字符串会以第一个参数的形式传给phase_1。你努力回忆起参数的传递方式：第一到第六个参数会分别被存放在寄存器%rdi, %rsi, %rdx, %rcx, %r8, %r9中。后面的参数则会被存放在栈中。这样一来第一阶段的目的就很明显了：将指向输入字符串的指针作为第一参数，地址0x402400作为第二参数传到strings_not_equal中。合理的猜测strings_not_equal会在两者指向的字符串不同时返回1，相同时返回0（阅读它的代码也证明了这一点）。快速阅读代码之后，你发现输入需要和0x402400指向的字符串相同。这时你打开了gdb牌万用表,使用x命令查看相应的地址：</p>
+<pre><code class="shell">(gdb) x /100s 0x402400
+0x402400:    &quot;Border relations with Canada have never been better.&quot;
+0x402435:    &quot;&quot;
+0x402436:    &quot;&quot;
+0x402437:    &quot;&quot;
+...
+</code></pre>
+<p>你大声喊道：“与加拿大的边境关系从来没有这么好过！”炸弹颤抖了一下，第一阶段被解除了。</p>
+<h1 id="第二阶段"><a href="#第二阶段" class="headerlink" title="第二阶段"></a>第二阶段</h1><p>你来到了第二阶段。一个奇怪的函数挡在你的面前：read_six_numbers。从字面意义上理解，是直接读入六个数字。但是这些数字会被存放在哪里呢？你找到read_six_numbers函数：</p>
+<pre><code class="assembly">000000000040145c &lt;read_six_numbers&gt;:
+  40145c:    48 83 ec 18              sub    $0x18,%rsp
+  401460:    48 89 f2                 mov    %rsi,%rdx          
+  401463:    48 8d 4e 04              lea    0x4(%rsi),%rcx     
+  401467:    48 8d 46 14              lea    0x14(%rsi),%rax    
+  40146b:    48 89 44 24 08           mov    %rax,0x8(%rsp)     
+  401470:    48 8d 46 10              lea    0x10(%rsi),%rax    
+  401474:    48 89 04 24              mov    %rax,(%rsp)        
+  401478:    4c 8d 4e 0c              lea    0xc(%rsi),%r9      
+  40147c:    4c 8d 46 08              lea    0x8(%rsi),%r8
+  401480:    be c3 25 40 00           mov    $0x4025c3,%esi     #format string address
+  401485:    b8 00 00 00 00           mov    $0x0,%eax
+  40148a:    e8 61 f7 ff ff           callq  400bf0 &lt;__isoc99_sscanf@plt&gt;
+  40148f:    83 f8 05                 cmp    $0x5,%eax
+  401492:    7f 05                    jg     401499 &lt;read_six_numbers+0x3d&gt; # if greater than 5 words return
+  401494:    e8 a1 ff ff ff           callq  40143a &lt;explode_bomb&gt;
+  401499:    48 83 c4 18              add    $0x18,%rsp
+  40149d:    c3                       retq
+</code></pre>
+<p>经过一段时间的理解，你发现read_six_numbers调用了sscanf函数。参考sscanf函数的<a href="http://www.cplusplus.com/reference/cstdio/sscanf/" target="_blank" rel="noopener">文档</a>，你知道它的第一个参数(%rdi)是输入的字符串，第二个参数(%rsi)是格式字符串，后面的参数分别对应格式字符串中的变量。根据汇编代码可以发现函数的参数为：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">%rdi</th>
+<th style="text-align:center">%rsi</th>
+<th style="text-align:center">%rdx</th>
+<th style="text-align:center">%rcx</th>
+<th style="text-align:center">%r8</th>
+<th style="text-align:center">%r9</th>
+<th style="text-align:center">arg7</th>
+<th style="text-align:center">arg8</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Values</td>
+<td style="text-align:center">input string</td>
+<td style="text-align:center">0x4025c3 (format string)</td>
+<td style="text-align:center">%rsp</td>
+<td style="text-align:center">%rsp+4</td>
+<td style="text-align:center">%rsp+8</td>
+<td style="text-align:center">%rsp+12</td>
+<td style="text-align:center">%rsp+16</td>
+<td style="text-align:center">%rsp+20</td>
+</tr>
+</tbody>
+</table>
+<p>使用gdb查看格式字符串内容：</p>
+<pre><code class="shell">(gdb) x/20s 0x4025c3
+0x4025c3:    &quot;%d %d %d %d %d %d&quot;
+...
+</code></pre>
+<p>需要输入六个字符，输入的字符会被保存在从rsp开始的连续内存中！你理解了read_six_numbers的运作方法，立即回到phase_2函数：</p>
+<pre><code class="assembly">0000000000400efc &lt;phase_2&gt;:
+  400efc:    55                       push   %rbp
+  400efd:    53                       push   %rbx
+  400efe:    48 83 ec 28              sub    $0x28,%rsp
+  400f02:    48 89 e6                 mov    %rsp,%rsi
+  400f05:    e8 52 05 00 00           callq  40145c &lt;read_six_numbers&gt;
+  400f0a:    83 3c 24 01              cmpl   $0x1,(%rsp)                #(%rsp)=1
+  400f0e:    74 20                    je     400f30 &lt;phase_2+0x34&gt;    
+  400f10:    e8 25 05 00 00           callq  40143a &lt;explode_bomb&gt;
+  400f15:    eb 19                    jmp    400f30 &lt;phase_2+0x34&gt;
+  400f17:    8b 43 fc                 mov    -0x4(%rbx),%eax            #loop starts
+  400f1a:    01 c0                    add    %eax,%eax                # *=2
+  400f1c:    39 03                    cmp    %eax,(%rbx)                # former*2==later
+  400f1e:    74 05                    je     400f25 &lt;phase_2+0x29&gt;    # if not, explode
+  400f20:    e8 15 05 00 00           callq  40143a &lt;explode_bomb&gt;
+  400f25:    48 83 c3 04              add    $0x4,%rbx
+  400f29:    48 39 eb                 cmp    %rbp,%rbx
+  400f2c:    75 e9                    jne    400f17 &lt;phase_2+0x1b&gt;
+  400f2e:    eb 0c                    jmp    400f3c &lt;phase_2+0x40&gt;
+  400f30:    48 8d 5c 24 04           lea    0x4(%rsp),%rbx
+  400f35:    48 8d 6c 24 18           lea    0x18(%rsp),%rbp
+  400f3a:    eb db                    jmp    400f17 &lt;phase_2+0x1b&gt;
+  400f3c:    48 83 c4 28              add    $0x28,%rsp
+  400f40:    5b                       pop    %rbx
+  400f41:    5d                       pop    %rbp
+  400f42:    c3                       retq
+</code></pre>
+<p>经过仔细的观察，你发现了第二阶段的要求：第一个数为1，后面每一个数都是前面数的两倍。这样答案就很明显了。你对炸弹说到：“1 2 4 8 16 32”！第二阶段无声的解除了。你来到了第三阶段。</p>
+<h1 id="第三阶段"><a href="#第三阶段" class="headerlink" title="第三阶段"></a>第三阶段</h1><pre><code class="assembly">0000000000400f43 &lt;phase_3&gt;:
+  400f43:    48 83 ec 18              sub    $0x18,%rsp
+  400f47:    48 8d 4c 24 0c           lea    0xc(%rsp),%rcx            # second param
+  400f4c:    48 8d 54 24 08           lea    0x8(%rsp),%rdx            # first param
+  400f51:    be cf 25 40 00           mov    $0x4025cf,%esi            # format string
+  400f56:    b8 00 00 00 00           mov    $0x0,%eax
+  400f5b:    e8 90 fc ff ff           callq  400bf0 &lt;__isoc99_sscanf@plt&gt;
+  400f60:    83 f8 01                 cmp    $0x1,%eax                # check # of inputs
+  400f63:    7f 05                    jg     400f6a &lt;phase_3+0x27&gt;    # if &gt; 1 jump
+  400f65:    e8 d0 04 00 00           callq  40143a &lt;explode_bomb&gt;
+  400f6a:    83 7c 24 08 07           cmpl   $0x7,0x8(%rsp)
+  400f6f:    77 3c                    ja     400fad &lt;phase_3+0x6a&gt;    # if &lt;0 or &gt;7 explode
+  400f71:    8b 44 24 08              mov    0x8(%rsp),%eax           # eax = first input
+  400f75:    ff 24 c5 70 24 40 00     jmpq   *0x402470(,%rax,8)       # 0x402470+8*%rax -&gt; index!
+  400f7c:    b8 cf 00 00 00           mov    $0xcf,%eax               # 0 -&gt; here
+  400f81:    eb 3b                    jmp    400fbe &lt;phase_3+0x7b&gt;
+  400f83:    b8 c3 02 00 00           mov    $0x2c3,%eax              # 2 -&gt; here
+  400f88:    eb 34                    jmp    400fbe &lt;phase_3+0x7b&gt;
+  400f8a:    b8 00 01 00 00           mov    $0x100,%eax              # 3 -&gt; here
+  400f8f:    eb 2d                    jmp    400fbe &lt;phase_3+0x7b&gt;
+  400f91:    b8 85 01 00 00           mov    $0x185,%eax              # 4 -&gt; here
+  400f96:    eb 26                    jmp    400fbe &lt;phase_3+0x7b&gt;
+  400f98:    b8 ce 00 00 00           mov    $0xce,%eax               # 5 -&gt; here
+  400f9d:    eb 1f                    jmp    400fbe &lt;phase_3+0x7b&gt;
+  400f9f:    b8 aa 02 00 00           mov    $0x2aa,%eax              # 6 -&gt; here
+  400fa4:    eb 18                    jmp    400fbe &lt;phase_3+0x7b&gt;
+  400fa6:    b8 47 01 00 00           mov    $0x147,%eax              # 7 -&gt; here
+  400fab:    eb 11                    jmp    400fbe &lt;phase_3+0x7b&gt;
+  400fad:    e8 88 04 00 00           callq  40143a &lt;explode_bomb&gt;
+  400fb2:    b8 00 00 00 00           mov    $0x0,%eax
+  400fb7:    eb 05                    jmp    400fbe &lt;phase_3+0x7b&gt;
+  400fb9:    b8 37 01 00 00           mov    $0x137,%eax              # 1 -&gt; here
+  400fbe:    3b 44 24 0c              cmp    0xc(%rsp),%eax
+  400fc2:    74 05                    je     400fc9 &lt;phase_3+0x86&gt;    # if equal 0xcf return
+  400fc4:    e8 71 04 00 00           callq  40143a &lt;explode_bomb&gt;
+  400fc9:    48 83 c4 18              add    $0x18,%rsp
+  400fcd:    c3                       retq
+</code></pre>
+<p>第三阶段用到了sscanf函数。经过第二阶段的你已经对它很熟悉了。你使用gdb查看格式字符串的地址：</p>
+<pre><code class="shell">(gdb) x/20s 0x4025cf
+0x4025cf:    &quot;%d %d&quot;
+...
+</code></pre>
+<p>需要输入两个数字。观察代码可以发现，第一个数字需要在0～7的范围之内。它会作为jmp的index，用相应的数字与第二个输入做比较。很容易发现，这一题一共有八个解。如果第一个数字为0，第二个数字需要为0xcf (dec 207)。你清楚的说道：“0 207”。炸弹顺利地解开了。</p>
+<h1 id="第四阶段"><a href="#第四阶段" class="headerlink" title="第四阶段"></a>第四阶段</h1><pre><code class="assembly">000000000040100c &lt;phase_4&gt;:
+  40100c:    48 83 ec 18              sub    $0x18,%rsp
+  401010:    48 8d 4c 24 0c           lea    0xc(%rsp),%rcx
+  401015:    48 8d 54 24 08           lea    0x8(%rsp),%rdx
+  40101a:    be cf 25 40 00           mov    $0x4025cf,%esi
+  40101f:    b8 00 00 00 00           mov    $0x0,%eax
+  401024:    e8 c7 fb ff ff           callq  400bf0 &lt;__isoc99_sscanf@plt&gt;
+  401029:    83 f8 02                 cmp    $0x2,%eax         # if not 2 -&gt; explode
+  40102c:    75 07                    jne    401035 &lt;phase_4+0x29&gt;
+  40102e:    83 7c 24 08 0e           cmpl   $0xe,0x8(%rsp)    # if &lt;=14 -&gt;jump else explode
+  401033:    76 05                    jbe    40103a &lt;phase_4+0x2e&gt;
+  401035:    e8 00 04 00 00           callq  40143a &lt;explode_bomb&gt;
+  40103a:    ba 0e 00 00 00           mov    $0xe,%edx
+  40103f:    be 00 00 00 00           mov    $0x0,%esi
+  401044:    8b 7c 24 08              mov    0x8(%rsp),%edi
+  401048:    e8 81 ff ff ff           callq  400fce &lt;func4&gt;
+  40104d:    85 c0                    test   %eax,%eax                # if return 1 -&gt; boom, else
+  40104f:    75 07                    jne    401058 &lt;phase_4+0x4c&gt;
+  401051:    83 7c 24 0c 00           cmpl   $0x0,0xc(%rsp)           # if input2 != 0 -&gt; boom
+  401056:    74 05                    je     40105d &lt;phase_4+0x51&gt;
+  401058:    e8 dd 03 00 00           callq  40143a &lt;explode_bomb&gt;
+  40105d:    48 83 c4 18              add    $0x18,%rsp
+  401061:    c3                       retq
+</code></pre>
+<p>来到第四阶段，你又一次遇到了sscanf函数。在不到一秒的时间内你就意识到0x4025cf这个地址在第三阶段中出现过，内容是读入两个整数。之后的范围检测也轻松被你识破。然而全新的函数挡在了你的眼前。从前面几行代码中你知道它的参数分别是：输入的第一个数，0，和0xe (dec 15)。你跳过它检查之后的代码，发现想让炸弹不爆炸，这个函数必须返回0。那么，胜利的关键就隐藏在这个函数之中了！没有犹豫，你找到了func4函数：</p>
+<pre><code class="assembly">0000000000400fce &lt;func4&gt;:
+  400fce:    48 83 ec 08              sub    $0x8,%rsp
+  400fd2:    89 d0                    mov    %edx,%eax
+  400fd4:    29 f0                    sub    %esi,%eax
+  400fd6:    89 c1                    mov    %eax,%ecx
+  400fd8:    c1 e9 1f                 shr    $0x1f,%ecx
+  400fdb:    01 c8                    add    %ecx,%eax
+  400fdd:    d1 f8                    sar    %eax
+  400fdf:    8d 0c 30                 lea    (%rax,%rsi,1),%ecx
+  400fe2:    39 f9                    cmp    %edi,%ecx            # if input 1 &lt;= 7,jump
+  400fe4:    7e 0c                    jle    400ff2 &lt;func4+0x24&gt;
+  400fe6:    8d 51 ff                 lea    -0x1(%rcx),%edx
+  400fe9:    e8 e0 ff ff ff           callq  400fce &lt;func4&gt;
+  400fee:    01 c0                    add    %eax,%eax
+  400ff0:    eb 15                    jmp    401007 &lt;func4+0x39&gt;
+  400ff2:    b8 00 00 00 00           mov    $0x0,%eax
+  400ff7:    39 f9                    cmp    %edi,%ecx
+  400ff9:    7d 0c                    jge    401007 &lt;func4+0x39&gt;  # if input 1 &gt;= 7, return
+  400ffb:    8d 71 01                 lea    0x1(%rcx),%esi
+  400ffe:    e8 cb ff ff ff           callq  400fce &lt;func4&gt;
+  401003:    8d 44 00 01              lea    0x1(%rax,%rax,1),%eax
+  401007:    48 83 c4 08              add    $0x8,%rsp
+  40100b:    c3                       retq
+</code></pre>
+<p>看到里面的递归，你流下了冷汗。这个函数比之前看到的都要复杂。然而通过仔细分析，你写出了程序的流程。最终你发现，在给定第二个参数为0，第三个参数为0xe的情况下，当输入的第一个数小于等于7时，函数才会返回0。加上前面发现输入二一定要为0，你确定了这一阶段的解法。你小声说道：”7 0“。炸弹被解开了。</p>
+<h1 id="第五阶段"><a href="#第五阶段" class="headerlink" title="第五阶段"></a>第五阶段</h1><pre><code class="assembly">0000000000401062 &lt;phase_5&gt;:
+  401062:    53                       push   %rbx
+  401063:    48 83 ec 20              sub    $0x20,%rsp
+  401067:    48 89 fb                 mov    %rdi,%rbx
+  40106a:    64 48 8b 04 25 28 00     mov    %fs:0x28,%rax
+  401071:    00 00
+  401073:    48 89 44 24 18           mov    %rax,0x18(%rsp)
+  401078:    31 c0                    xor    %eax,%eax
+  40107a:    e8 9c 02 00 00           callq  40131b &lt;string_length&gt;
+  40107f:    83 f8 06                 cmp    $0x6,%eax
+  401082:    74 4e                    je     4010d2 &lt;phase_5+0x70&gt;        # if not length 6 -&gt; boom
+  401084:    e8 b1 03 00 00           callq  40143a &lt;explode_bomb&gt;
+  401089:    eb 47                    jmp    4010d2 &lt;phase_5+0x70&gt;
+  40108b:    0f b6 0c 03              movzbl (%rbx,%rax,1),%ecx
+  40108f:    88 0c 24                 mov    %cl,(%rsp)                   # low bits of ecx
+  401092:    48 8b 14 24              mov    (%rsp),%rdx
+  401096:    83 e2 0f                 and    $0xf,%edx
+  401099:    0f b6 92 b0 24 40 00     movzbl 0x4024b0(%rdx),%edx
+  4010a0:    88 54 04 10              mov    %dl,0x10(%rsp,%rax,1)
+  4010a4:    48 83 c0 01              add    $0x1,%rax
+  4010a8:    48 83 f8 06              cmp    $0x6,%rax                    # if rax !=6 jump
+  4010ac:    75 dd                    jne    40108b &lt;phase_5+0x29&gt;
+  4010ae:    c6 44 24 16 00           movb   $0x0,0x16(%rsp)
+  4010b3:    be 5e 24 40 00           mov    $0x40245e,%esi
+  4010b8:    48 8d 7c 24 10           lea    0x10(%rsp),%rdi
+  4010bd:    e8 76 02 00 00           callq  401338 &lt;strings_not_equal&gt;
+  4010c2:    85 c0                    test   %eax,%eax             # if equal-&gt; jump
+  4010c4:    74 13                    je     4010d9 &lt;phase_5+0x77&gt;
+  4010c6:    e8 6f 03 00 00           callq  40143a &lt;explode_bomb&gt;
+  4010cb:    0f 1f 44 00 00           nopl   0x0(%rax,%rax,1)
+  4010d0:    eb 07                    jmp    4010d9 &lt;phase_5+0x77&gt;
+  4010d2:    b8 00 00 00 00           mov    $0x0,%eax
+  4010d7:    eb b2                    jmp    40108b &lt;phase_5+0x29&gt;
+  4010d9:    48 8b 44 24 18           mov    0x18(%rsp),%rax       # check not overflow
+  4010de:    64 48 33 04 25 28 00     xor    %fs:0x28,%rax
+  4010e5:    00 00
+  4010e7:    74 05                    je     4010ee &lt;phase_5+0x8c&gt;
+  4010e9:    e8 42 fa ff ff           callq  400b30 &lt;__stack_chk_fail@plt&gt;
+  4010ee:    48 83 c4 20              add    $0x20,%rsp
+  4010f2:    5b                       pop    %rbx
+  4010f3:    c3                       retq
+</code></pre>
+<p>这一阶段的代码非常长，你有些心急。没有细看，你发现开始一部分的代码在比较字符串长度。也就是说，要输入长度为6的字符串。下面一段就有一点不明所以了。它将输入字符串中的每一个字符都截取低位（一个字节），又把它加上一个奇怪的偏移量存放到内存中。这是在做什么？那个偏移量看起来像一个内存地址。你又一次使用了gdb:</p>
+<pre><code class="bash">(gdb) x/3s 0x4024b0
+0x4024b0 &lt;array.3449&gt;:    &quot;maduiersnfotvbylSo you think you can stop the bomb with ctrl-c, do you?&quot;
+...
+</code></pre>
+<p>一串神秘的字符串！难道说是用偏移量来选择字符？你激动了起来，继续看去。新生成的字符串会和在内存位置</p>
+<p>0x40245e的字符串做比较！解法一下子明晰了起来。</p>
+<pre><code class="shell">(gdb) x/3s 0x40245e
+0x40245e:    &quot;flyers&quot;
+...
+</code></pre>
+<p>Flyers！这就是需要拼凑出来的密码！你计算出需要的偏移量分别为9，15，14，5，6，7。你掏出了ASCII码表，却发现这些字符全都是控制字符。这应该怎么输入？有些焦躁，你又回过头去看之前的步骤。突然你明白了截取低位的意义：输入的字符只要在二进制表示上最低位的字节表示和9，15，14，5，6，7相同即可。你生气地把所有数字加上32 (0b00100000)，骂道：“)/.%&amp;’”！炸弹弹跳了一下，解除了。</p>
+<h1 id="第六阶段"><a href="#第六阶段" class="headerlink" title="第六阶段"></a>第六阶段</h1><pre><code class="assembly">00000000004010f4 &lt;phase_6&gt;:
+  # 1
+  4010f4:    41 56                    push   %r14
+  4010f6:    41 55                    push   %r13
+  4010f8:    41 54                    push   %r12
+  4010fa:    55                       push   %rbp
+  4010fb:    53                       push   %rbx
+  4010fc:    48 83 ec 50              sub    $0x50,%rsp
+  401100:    49 89 e5                 mov    %rsp,%r13
+  401103:    48 89 e6                 mov    %rsp,%rsi
+  401106:    e8 51 03 00 00           callq  40145c &lt;read_six_numbers&gt;
+  40110b:    49 89 e6                 mov    %rsp,%r14
+  40110e:    41 bc 00 00 00 00        mov    $0x0,%r12d
+  401114:    4c 89 ed                 mov    %r13,%rbp
+  401117:    41 8b 45 00              mov    0x0(%r13),%eax
+  40111b:    83 e8 01                 sub    $0x1,%eax
+  40111e:    83 f8 05                 cmp    $0x5,%eax
+  401121:    76 05                    jbe    401128 &lt;phase_6+0x34&gt; # if input1 - 1 &lt;=5 -&gt; jump else boom
+  401123:    e8 12 03 00 00           callq  40143a &lt;explode_bomb&gt;
+
+  # 2
+  401128:    41 83 c4 01              add    $0x1,%r12d           # r12++
+  40112c:    41 83 fc 06              cmp    $0x6,%r12d           # if r12 == 6 -&gt; jump
+  401130:    74 21                    je     401153 &lt;phase_6+0x5f&gt;
+  401132:    44 89 e3                 mov    %r12d,%ebx
+  401135:    48 63 c3                 movslq %ebx,%rax            # (ebx-&gt;rax)
+  401138:    8b 04 84                 mov    (%rsp,%rax,4),%eax
+  40113b:    39 45 00                 cmp    %eax,0x0(%rbp)       # if the same as 1st input-&gt;boom
+  40113e:    75 05                    jne    401145 &lt;phase_6+0x51&gt;
+  401140:    e8 f5 02 00 00           callq  40143a &lt;explode_bomb&gt;
+  401145:    83 c3 01                 add    $0x1,%ebx            # ebx+=1
+  401148:    83 fb 05                 cmp    $0x5,%ebx            # if ebx &lt;=5
+  40114b:    7e e8                    jle    401135 &lt;phase_6+0x41&gt;
+  40114d:    49 83 c5 04              add    $0x4,%r13
+  401151:    eb c1                    jmp    401114 &lt;phase_6+0x20&gt;
+
+  # 3
+  401153:    48 8d 74 24 18           lea    0x18(%rsp),%rsi       # rsi = rsp + 24
+  401158:    4c 89 f0                 mov    %r14,%rax             # rax = rsp
+  40115b:    b9 07 00 00 00           mov    $0x7,%ecx             # rcx = 7
+  401160:    89 ca                    mov    %ecx,%edx             # rdx = 7
+  401162:    2b 10                    sub    (%rax),%edx           # rdx = 7 - input1
+  401164:    89 10                    mov    %edx,(%rax)           # input1 = 7-input1
+  401166:    48 83 c0 04              add    $0x4,%rax
+  40116a:    48 39 f0                 cmp    %rsi,%rax             # all input-&gt; 7-input
+  40116d:    75 f1                    jne    401160 &lt;phase_6+0x6c&gt;
+
+  # 4
+  40116f:    be 00 00 00 00           mov    $0x0,%esi
+  401174:    eb 21                    jmp    401197 &lt;phase_6+0xa3&gt;
+  401176:    48 8b 52 08              mov    0x8(%rdx),%rdx       # rdx = node info
+  40117a:    83 c0 01                 add    $0x1,%eax            # ax++
+  40117d:    39 c8                    cmp    %ecx,%eax
+  40117f:    75 f5                    jne    401176 &lt;phase_6+0x82&gt;    # find the corresponding node
+  401181:    eb 05                    jmp    401188 &lt;phase_6+0x94&gt;
+  401183:    ba d0 32 60 00           mov    $0x6032d0,%edx
+  401188:    48 89 54 74 20           mov    %rdx,0x20(%rsp,%rsi,2)
+  40118d:    48 83 c6 04              add    $0x4,%rsi
+  401191:    48 83 fe 18              cmp    $0x18,%0
+  401195:    74 14                    je     4011ab &lt;phase_6+0xb7&gt;
+  401197:    8b 0c 34                 mov    (%rsp,%rsi,1),%ecx
+  40119a:    83 f9 01                 cmp    $0x1,%ecx              # if ecx &lt;=1
+  40119d:    7e e4                    jle    401183 &lt;phase_6+0x8f&gt;
+  40119f:    b8 01 00 00 00           mov    $0x1,%eax              # else eax -&gt; 1
+  4011a4:    ba d0 32 60 00           mov    $0x6032d0,%edx
+  4011a9:    eb cb                    jmp    401176 &lt;phase_6+0x82&gt;
+  4011ab:    48 8b 5c 24 20           mov    0x20(%rsp),%rbx
+  4011b0:    48 8d 44 24 28           lea    0x28(%rsp),%rax
+  4011b5:    48 8d 74 24 50           lea    0x50(%rsp),%rsi
+  4011ba:    48 89 d9                 mov    %rbx,%rcx
+  4011bd:    48 8b 10                 mov    (%rax),%rdx
+  4011c0:    48 89 51 08              mov    %rdx,0x8(%rcx)
+  4011c4:    48 83 c0 08              add    $0x8,%rax
+  4011c8:    48 39 f0                 cmp    %rsi,%rax
+  4011cb:    74 05                    je     4011d2 &lt;phase_6+0xde&gt;
+  4011cd:    48 89 d1                 mov    %rdx,%rcx
+  4011d0:    eb eb                    jmp    4011bd &lt;phase_6+0xc9&gt;
+  4011d2:    48 c7 42 08 00 00 00     movq   $0x0,0x8(%rdx)
+  4011d9:    00
+
+  # 5
+  4011da:    bd 05 00 00 00           mov    $0x5,%ebp
+  4011df:    48 8b 43 08              mov    0x8(%rbx),%rax
+  4011e3:    8b 00                    mov    (%rax),%eax
+  4011e5:    39 03                    cmp    %eax,(%rbx)
+  4011e7:    7d 05                    jge    4011ee &lt;phase_6+0xfa&gt;
+  4011e9:    e8 4c 02 00 00           callq  40143a &lt;explode_bomb&gt;
+  4011ee:    48 8b 5b 08              mov    0x8(%rbx),%rbx
+  4011f2:    83 ed 01                 sub    $0x1,%ebp
+  4011f5:    75 e8                    jne    4011df &lt;phase_6+0xeb&gt;
+  4011f7:    48 83 c4 50              add    $0x50,%rsp
+  4011fb:    5b                       pop    %rbx
+  4011fc:    5d                       pop    %rbp
+  4011fd:    41 5c                    pop    %r12
+  4011ff:    41 5d                    pop    %r13
+  401201:    41 5e                    pop    %r14
+  401203:    c3                       retq
+</code></pre>
+<p>看到如此长的代码，你感到一丝绝望。不过解除炸弹的信念让你坚持了下去。你将代码分成了几段。第一段是用来检测输入的范围，第二段是用来判断输入有没有重复，第三段则用7减去每个输入的数字。但是第四段是在做什么？0x6032d0这个地址可能是突破口：</p>
+<pre><code class="shell">(gdb) x/24x 0x6032d0
+0x6032d0 &lt;node1&gt;:    0x0000014c    0x00000001    0x006032e0    0x00000000
+0x6032e0 &lt;node2&gt;:    0x000000a8    0x00000002    0x006032f0    0x00000000
+0x6032f0 &lt;node3&gt;:    0x0000039c    0x00000003    0x00603300    0x00000000
+0x603300 &lt;node4&gt;:    0x000002b3    0x00000004    0x00603310    0x00000000
+0x603310 &lt;node5&gt;:    0x000001dd    0x00000005    0x00603320    0x00000000
+0x603320 &lt;node6&gt;:    0x000001bb    0x00000006    0x00000000    0x00000000
+</code></pre>
+<p>第二栏似乎是编号？第三栏指向下一个的地址…等等，node? 这难道是链表？这下子你明白了：第四段是在选择出对应编号的节点所储存的值。按照这种思路，第五段也不难理解：判断这些值是否以降序排列。注意到第三段用7减去了相应的序号，在输入时也要先用7与序号相减。于是你对炸弹喊到：“4 3 2 1 6 5“！炸弹整个裂开了。你已经解开了所有关卡！紧张的神经一下子松懈下来，你拖着疲惫的脚步走出了实验室。</p>
+<h1 id="？？？"><a href="#？？？" class="headerlink" title="？？？"></a>？？？</h1><p>屏幕后，邪恶博士交叉着双手，注视着你的背影。“你以为你解开了所有阶段了么？”笑容出现在邪恶博士的嘴角上，“真是年轻而幼稚啊。” </p>
+<p>碎裂的弹壳下，一枚LED正安静地闪烁着绿光。</p>
+<p>（注：除了6个阶段之外，这一个lab其实还存在secret_phase。因为时间原因，我就把它跳过去啦！具体解法请移步其他博客 e.g. <a href="https://wdxtub.com/2016/04/16/thick-csapp-lab-2/" target="_blank" rel="noopener">【不周山之读厚 CSAPP】II Bomb Lab</a>。那么，下一个lab见！）</p>
+
+    </div>
+    <link rel="stylesheet" href="/css/gitalk.css">
+<script src="/js/gitalk.min.js"></script>
+<div id="gitalk-container"></div>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '4d9730cc3432c4ae23a2',
+        clientSecret: '9ee5e04e412db75f2fd5e5b93c39a9da7f0c467b',
+        id: window.location.pathname,
+        repo: 'micint0sh.github.io',
+        owner: 'Micint0sh',
+        admin: 'Micint0sh',
+        distractionFreeMode: 'true'
+    })
+    gitalk.render('gitalk-container')
+</script>
+
+</div>
+
+        </main>
+    </div>
+
+    <!--Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="/js/materialize.js"></script>
+    <script type="text/javascript" src="/js/highlight.pack.js"></script>
+    <script type="text/javascript" src="/js/highlightjs-line-numbers.js"></script>
+    <script type="text/javascript" src="/js/init.js"></script>
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+  </body>
+</html>
